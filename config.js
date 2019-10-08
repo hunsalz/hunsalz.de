@@ -11,7 +11,7 @@ module.exports = {
   // social
 
   authorName: 'Markus Hunsalz',
-  authorHeading: 'Web Enthusiast',
+  authorHeading: 'Re-think common design patterns',
   authorSocialLinks: [
     {
       icon: 'fa-github',
