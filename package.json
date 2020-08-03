@@ -10,16 +10,16 @@
     "name": "Markus Hunsalz"
   },
   "dependencies": {
-    "gatsby": "^2.19.12",
-    "gatsby-plugin-manifest": "^2.2.41",
-    "gatsby-plugin-offline": "^3.0.34",
-    "gatsby-plugin-react-helmet": "^3.1.22",
-    "gatsby-plugin-sass": "^2.1.28",
-    "node-sass": "^4.13.1",
-    "npm-check-updates": "^4.0.1",
-    "react": "^16.12.0",
-    "react-dom": "^16.12.0",
-    "react-helmet": "^5.2.1"
+    "gatsby": "^2.24.24",
+    "gatsby-plugin-manifest": "^2.4.21",
+    "gatsby-plugin-offline": "^3.2.21",
+    "gatsby-plugin-react-helmet": "^3.3.10",
+    "gatsby-plugin-sass": "^2.3.12",
+    "node-sass": "^4.14.1",
+    "npm-check-updates": "^7.0.2",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
+    "react-helmet": "^6.1.0"
   },
   "scripts": {
     "develop": "gatsby develop",
@@ -31,9 +31,9 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "devDependencies": {
-    "gh-pages": "^2.2.0",
-    "prettier": "^1.19.1",
-    "rimraf": "^3.0.1"
+    "gh-pages": "^3.1.0",
+    "prettier": "^2.0.5",
+    "rimraf": "^3.0.2"
   },
   "keywords": [
     "gatsby",
