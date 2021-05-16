@@ -18,5 +18,10 @@ module.exports = {
       name: 'Github',
       url: 'https://github.com/hunsalz',
     },
+    {
+      icon: 'fa-linkedin',
+      name: 'LinkedIn',
+      url: 'https://www.linkedin.com/in/markus-hunsalz',
+    }
   ],
 };
