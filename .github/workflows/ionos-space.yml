@@ -17,10 +17,10 @@ jobs:
           project: 23e34923-cf53-4bf4-9306-942383455630
           service-host: api-eu.ionos.space
           api-key: ${{ secrets.IONOS_API_KEY }}
-      - name: Setup Node.js 12.16.x
+      - name: Setup Node.js 16.2.x
         uses: actions/setup-node@v1
         with:
-          node-version: 12.16.x
+          node-version: 16.2.x
       - name: Prepare Project build environment
         run: |
           npm install --global yarn
