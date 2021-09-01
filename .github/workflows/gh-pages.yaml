@@ -26,7 +26,7 @@ jobs:
           yarn build
         env:
           CI: true
-      - name: Deployment ${{ env.HAS_GH_TOKEN != '' && 'enabled' || 'disabled' }}
+      - name: Deployment ${{ secrets.GH_TOKEN != '' && 'enabled' || 'disabled' }}
         if: env.HAS_GH_TOKEN != '' # run deployment not until GH_TOKEN is available
         uses: Cecilapp/GitHub-Pages-deploy@v3
         env:
