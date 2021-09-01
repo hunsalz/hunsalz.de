@@ -1,0 +1,42 @@
+{
+  "name": "hunsalz.de",
+  "version": "0.0.1",
+  "description": "Portfolio page",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hunsalz/hunsalz.de.git"
+  },
+  "author": {
+    "name": "Markus Hunsalz"
+  },
+  "dependencies": {
+    "gatsby": "^3.12.1",
+    "gatsby-plugin-manifest": "^3.12.0",
+    "gatsby-plugin-offline": "^4.12.0",
+    "gatsby-plugin-react-helmet": "^4.12.0",
+    "gatsby-plugin-sass": "^4.12.0",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "react-helmet": "^6.1.0"
+  },
+  "scripts": {
+    "develop": "gatsby develop",
+    "build": "yarn run clean && gatsby build",
+    "deploy": "yarn run clean && gatsby build --prefix-paths && gh-pages -d public",
+    "serve": "gatsby serve",
+    "clean": "rm -rf .cache public",
+    "format": "prettier --write '**/*.js'",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "devDependencies": {
+    "gh-pages": "^3.2.3",
+    "prettier": "^2.3.2",
+    "rimraf": "^3.0.2",
+    "node-sass": "^6.0.1"
+  },
+  "keywords": [
+    "website",
+    "gatsby"
+  ],
+  "license": "MIT"
+}
