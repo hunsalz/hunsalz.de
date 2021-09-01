@@ -10,9 +10,6 @@ env:
   PATH_PREFIX: /hunsalz.de
 
 jobs:
-  preflight:
-    - name: GitHub token is ${{ env.GH_TOKEN_AVAILABLE && 'available' || 'unavailable' }}
-    - name: Auto deployment will be ${{ env.RUN_DEPLOYMENT && 'executed' || 'skipped' }}
   build:
     if: env.GH_TOKEN_AVAILABLE && env.RUN_DEPLOYMENT
     runs-on: ubuntu-latest
