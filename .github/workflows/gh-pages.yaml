@@ -3,15 +3,19 @@ name: Deploy to pages.github.com
 on: [push]
 
 env:
-  HAS_GH_TOKEN: ${{ secrets.GH_TOKEN && true || false }}
+  GH_TOKEN_AVAILABLE: ${{ secrets.GH_TOKEN && true || false }}
+  RUN_DEPLOYMENT: ${{ !contains(github.event.head_commit.message, 'skip deploy') && true || false }}
   SITE_TITLE: My home is my castle
   SITE_URL: https://hunsalz.github.io
   PATH_PREFIX: /hunsalz.de
 
 jobs:
+  preflight:
+    - name: GitHub token is ${{ env.GH_TOKEN_AVAILABLE && available|| unavailable }}
+    - name: Auto deployment will be ${{ env.RUN_DEPLOYMENT && executed || skipped }}
   build:
+    if: env.GH_TOKEN_AVAILABLE && env.RUN_DEPLOYMENT
     runs-on: ubuntu-latest
-    if: "!contains(github.event.head_commit.message, 'skip deploy')"
     strategy:
       matrix:
         node-version: [16.x]
@@ -30,8 +34,7 @@ jobs:
           yarn build
         env:
           CI: true
-      - name: Deploy build to ${{ env.SITE_URL }} ${{ env.PATH_PREFIX }} = ${{ env.HAS_GH_TOKEN }}
-        if: env.HAS_GH_TOKEN # run deployment not until GH_TOKEN is available
+      - name: Deploy build to ${{ env.SITE_URL }} ${{ env.PATH_PREFIX }}
         uses: Cecilapp/GitHub-Pages-deploy@v3
         env:
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
