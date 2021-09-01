@@ -1,4 +1,4 @@
-name: IONOS.space
+name: Deploy to IONOS.space
 
 on: [push]
 
