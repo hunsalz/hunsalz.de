@@ -29,7 +29,9 @@ jobs:
           yarn build
         env:
           CI: true
-      - name: Deploy build to {{ env.SITE_URL }} ${{ env.PATH_PREFIX }} ${{ env.HAS_GH_TOKEN }}
+          SITE_URL: https://hunsalz.github.io
+          PATH_PREFIX: /hunsalz.de
+      - name: Deploy build to ${{ env.SITE_URL }} ${{ env.PATH_PREFIX }} = ${{ env.HAS_GH_TOKEN }}
         if: env.HAS_GH_TOKEN # run deployment not until GH_TOKEN is available
         uses: Cecilapp/GitHub-Pages-deploy@v3
         env:

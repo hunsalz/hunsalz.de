@@ -32,6 +32,7 @@ jobs:
         env:
           CI: true
           SITE_URL: ${{ steps.project.outputs.site-url }}
+          PATH_PREFIX: ''
       - name: Deploy build to ${{ steps.project.outputs.site-url }}
         if: ${{ steps.project.outputs.deployment-enabled == 'true' }}
         uses: ionos-deploy-now/deploy-to-ionos-action@v1
