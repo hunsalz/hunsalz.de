@@ -15,7 +15,10 @@ jobs:
       matrix:
         node-version: [16.x]
     steps:
-      - uses: actions/checkout@v2
+      - name: Checkout project
+        uses: actions/checkout@v2
+        with:
+          submodules: 'recursive'
       - name: Prepare env (node -v ${{ matrix.node-version }})
         uses: actions/setup-node@v1
         with:
@@ -26,10 +29,10 @@ jobs:
           yarn build
         env:
           CI: true
-      - name: Deploy build to ${{ env.SITE_URL }} ${{ env.PATH_PREFIX }} ${{ env.HAS_GH_TOKEN }}
+      - name: Deploy build to {{ env.SITE_URL }} ${{ env.PATH_PREFIX }} ${{ env.HAS_GH_TOKEN }}
         if: env.HAS_GH_TOKEN # run deployment not until GH_TOKEN is available
         uses: Cecilapp/GitHub-Pages-deploy@v3
         env:
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
         with:
-          build_dir: dist/
+          build_dir: public
