@@ -4,6 +4,7 @@ on: [push]
 
 env:
   HAS_GH_TOKEN: ${{ secrets.GH_TOKEN && true || false }}
+  SITE_TITLE: My home is my castle
   SITE_URL: https://hunsalz.github.io
   PATH_PREFIX: /hunsalz.de
 
@@ -29,12 +30,10 @@ jobs:
           yarn build
         env:
           CI: true
-          SITE_URL: https://hunsalz.github.io
-          PATH_PREFIX: /hunsalz.de
       - name: Deploy build to ${{ env.SITE_URL }} ${{ env.PATH_PREFIX }} = ${{ env.HAS_GH_TOKEN }}
         if: env.HAS_GH_TOKEN # run deployment not until GH_TOKEN is available
         uses: Cecilapp/GitHub-Pages-deploy@v3
         env:
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
         with:
-          build_dir: public
+          build_dir: dist

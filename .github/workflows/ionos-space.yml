@@ -31,6 +31,7 @@ jobs:
         run: yarn build
         env:
           CI: true
+          SITE_TITLE: My home is my castle
           SITE_URL: ${{ steps.project.outputs.site-url }}
           PATH_PREFIX: ''
       - name: Deploy build to ${{ steps.project.outputs.site-url }}
@@ -41,6 +42,6 @@ jobs:
           branch-id: ${{ steps.project.outputs.branch-id }}
           storage-quota: ${{ steps.project.outputs.storage-quota }}
           project: 719bd98b-3b8c-477b-8563-018a96856ab6
-          dist-folder: public
+          dist-folder: dist
           remote-host: ${{ steps.project.outputs.remote-host }}
           api-key: ${{ secrets.IONOS_API_KEY }}
