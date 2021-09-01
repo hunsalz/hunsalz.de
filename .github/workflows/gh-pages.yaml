@@ -3,7 +3,7 @@ name: Deploy to pages.github.com
 on: [push]
 
 env:
-  HAS_GH_TOKEN: ${{ secrets.GH_TOKEN }}
+  HAS_GH_TOKEN: ${{ secrets.GH_TOKEN && true || false }}
   SITE_URL: https://hunsalz.github.io
   PATH_PREFIX: /hunsalz.de
 
@@ -26,8 +26,8 @@ jobs:
           yarn build
         env:
           CI: true
-      - name: Deployment ${{ secrets.GH_TOKEN != '' && 'enabled' || 'disabled' }}
-        if: env.HAS_GH_TOKEN != '' # run deployment not until GH_TOKEN is available
+      - name: Deploy build to ${{ SITE_URL }} ${{ PATH_PREFIX }} ${{ HAS_GH_TOKEN }}
+        if: env.HAS_GH_TOKEN # run deployment not until GH_TOKEN is available
         uses: Cecilapp/GitHub-Pages-deploy@v3
         env:
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
