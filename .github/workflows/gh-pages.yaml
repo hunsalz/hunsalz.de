@@ -11,7 +11,7 @@ env:
 
 jobs:
   build:
-    if: env.GH_TOKEN_AVAILABLE && env.RUN_DEPLOYMENT
+    if: ${{ env.GH_TOKEN_AVAILABLE && env.RUN_DEPLOYMENT }}
     runs-on: ubuntu-latest
     strategy:
       matrix:
