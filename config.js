@@ -7,8 +7,7 @@ module.exports = {
   manifestThemeColor: '#663399',
   manifestDisplay: 'standalone',
   manifestIcon: 'src/assets/images/website-icon.png',
-  pathPrefix: `/gatsby-starter-aerial/`, // This path is subpath of your hosting https://domain/portfolio
-  // social
+  pathPrefix: process.env.PATH_PREFIX,
 
   authorName: 'Markus Hunsalz',
   authorHeading: 'Re-think common design patterns',
