@@ -25,7 +25,7 @@ jobs:
           echo "::endgroup::"
       - name: Result
         id: result
-          echo "::set-output name=run_build::${{ env.GH_TOKEN_AVAILABLE && env.RUN_CI }}"
+        run: echo "::set-output name=run_build::${{ env.GH_TOKEN_AVAILABLE && env.RUN_CI }}"
   build:
     name: Build
     needs: preflight
