@@ -32,7 +32,7 @@ jobs:
       PATH_PREFIX: /hunsalz.de
     steps:
       - name: Check preflight result
-        run: echo ${{ ::warning Build stopped }}
+        run: echo ":warning Build stopped"
       - name: Checkout project
         uses: actions/checkout@v2
         with:
