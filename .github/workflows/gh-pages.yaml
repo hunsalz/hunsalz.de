@@ -10,7 +10,7 @@ jobs:
       GH_TOKEN_AVAILABLE: ${{ secrets.GH_TOKEN && true || false }}
       RUN_CI: ${{ !contains(github.event.head_commit.message, 'skip ci') && true || false }}
     outputs:
-      preflight: ${{ steps.result.outputs.run_build }}
+      run_build: ${{ steps.result.outputs.run_build }}
     steps: 
       - name: Log
         run: |
