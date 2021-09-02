@@ -8,7 +8,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       GH_TOKEN_AVAILABLE: ${{ secrets.GH_TOKEN && true || false }}
-      RUN_DEPLOYMENT: ${{ !contains(github.event.head_commit.message, 'skip deploy') && true || false }}
+      RUN_CI: ${{ !contains(github.event.head_commit.message, 'skip ci') && true || false }}
       SITE_TITLE: My home is my castle
       SITE_URL: https://hunsalz.github.io
       PATH_PREFIX: /hunsalz.de
@@ -16,8 +16,8 @@ jobs:
       - name: Preflight
         run: |
           echo "GitHub token ${{ env.GH_TOKEN_AVAILABLE && 'available' || 'unavailable' }}"
-          echo "Auto deployment ${{ env.RUN_DEPLOYMENT && 'enabled' || 'skipped' }}"
-        if: ${{ env.GH_TOKEN_AVAILABLE && env.RUN_DEPLOYMENT }}
+          echo "Auto deployment ${{ env.RUN_CI && 'enabled' || 'skipped' }}"
+        if: ${{ env.GH_TOKEN_AVAILABLE && env.RUN_CI }}
       - name: Checkout project
         uses: actions/checkout@v2
         with:
