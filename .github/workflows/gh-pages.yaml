@@ -4,6 +4,7 @@ on: [push]
 
 jobs:
   build:
+    name: Run build
     runs-on: ubuntu-latest
     env:
       GH_TOKEN_AVAILABLE: ${{ secrets.GH_TOKEN && true || false }}
@@ -11,11 +12,11 @@ jobs:
       SITE_TITLE: My home is my castle
       SITE_URL: https://hunsalz.github.io
       PATH_PREFIX: /hunsalz.de
-    if: $GH_TOKEN_AVAILABLE
     strategy:
       matrix:
         node-version: [16.x]
     steps:
+      if: ${{ env.GH_TOKEN_AVAILABLE && env.GH_RUN_DEPLOYMENT }}
       - name: Checkout project
         uses: actions/checkout@v2
         with:
