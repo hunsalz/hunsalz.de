@@ -14,8 +14,9 @@ jobs:
       PATH_PREFIX: /hunsalz.de
     steps:
       - name: Preflight
-        run: echo "GitHub token ${{ env.GH_TOKEN_AVAILABLE && 'available' || 'unavailable' }}"
-        run: echo "Auto deployment ${{ env.RUN_DEPLOYMENT && 'enabled' || 'skipped' }}"
+        run: |
+          echo "GitHub token ${{ env.GH_TOKEN_AVAILABLE && 'available' || 'unavailable' }}"
+          echo "Auto deployment ${{ env.RUN_DEPLOYMENT && 'enabled' || 'skipped' }}"
         if: ${{ env.GH_TOKEN_AVAILABLE && env.RUN_DEPLOYMENT }}
       - name: Checkout project
         uses: actions/checkout@v2
