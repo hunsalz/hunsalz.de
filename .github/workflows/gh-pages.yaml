@@ -1,6 +1,9 @@
 name: Deploy to GitHub Pages
 
 on: [push]
+  paths:
+      - '**' # includes
+      - '!README.md' # excludes
 
 jobs:
   preflight:
@@ -10,7 +13,7 @@ jobs:
       GH_TOKEN_AVAILABLE: ${{ secrets.GH_TOKEN && true || false }}
       RUN_CI: ${{ !contains(github.event.head_commit.message, 'skip ci') && true || false }}
     outputs:
-      run_build: ${{ steps.result.outputs.run_build }}
+      execute: ${{ steps.result.outputs.execute }}
     steps: 
       - name: Log
         run: |
@@ -20,45 +23,38 @@ jobs:
           echo "::endgroup::"
       - name: Result
         id: result
-        run: echo "::set-output name=run_build::${{ env.GH_TOKEN_AVAILABLE && env.RUN_CI }}"
-  build:
-    name: Build
+        run: echo "::set-output name=execute::${{ env.GH_TOKEN_AVAILABLE && env.RUN_CI }}"
+  build_and_deploy:
+    name: Build & Deploy
     needs: preflight
     runs-on: ubuntu-latest
     env:
-      RUN_BUILD: ${{ needs.preflight.outputs.run_build }}
+      RUN_JOB: ${{ needs.preflight.outputs.execute }}
       SITE_TITLE: My home is my castle
       SITE_URL: https://hunsalz.github.io
       PATH_PREFIX: /hunsalz.de
     steps:
       - name: Checkout project
-        if: RUN_BUILD
+        if: ${{ env.RUN_JOB }}
         uses: actions/checkout@v2
         with:
           submodules: 'recursive'
       - name: Prepare env
-        if: RUN_BUILD
+        if: ${{ env.RUN_JOB }}
         uses: actions/setup-node@v1
         with:
           node-version: 16.x
       - name: Build project
-        if: RUN_BUILD
+        if: ${{ env.RUN_JOB }}
         run: |
           yarn install
           yarn build
         env:
           CI: true
       - name: Deploy build to ${{ env.SITE_URL }}${{ env.PATH_PREFIX }}
-        if: RUN_BUILD
+        if: ${{ env.RUN_JOB }}
         uses: Cecilapp/GitHub-Pages-deploy@v3
         env:
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
         with:
           build_dir: dist
-  deploy:
-    name: Deploy
-    needs: build
-    runs-on: ubuntu-latest
-    steps:
-      - name: Deploy
-        run: echo "Nothing yet"
