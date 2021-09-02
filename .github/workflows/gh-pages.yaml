@@ -26,13 +26,13 @@ jobs:
     needs: preflight
     runs-on: ubuntu-latest
     env:
+      RUN_BUILD: ${{ needs.preflight.outputs.run_build }}
       SITE_TITLE: My home is my castle
       SITE_URL: https://hunsalz.github.io
       PATH_PREFIX: /hunsalz.de
     steps:
       - name: Check preflight result
-        if: ${{ needs.preflight.outputs.run_build == true }}
-        run: echo ${{ needs.preflight.outputs.run_build }}
+        run: echo ${{ ::warning Build stopped }}
       - name: Checkout project
         uses: actions/checkout@v2
         with:
