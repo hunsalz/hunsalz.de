@@ -11,7 +11,7 @@ jobs:
       SITE_TITLE: My home is my castle
       SITE_URL: https://hunsalz.github.io
       PATH_PREFIX: /hunsalz.de
-    if: ${{ env.GH_TOKEN_AVAILABLE }}
+    if: $GH_TOKEN_AVAILABLE
     strategy:
       matrix:
         node-version: [16.x]
