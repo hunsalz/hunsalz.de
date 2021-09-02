@@ -31,23 +31,25 @@ jobs:
       SITE_URL: https://hunsalz.github.io
       PATH_PREFIX: /hunsalz.de
     steps:
-      - name: Check preflight result
-        run: echo ":warning Build stopped"
       - name: Checkout project
+        if: RUN_BUILD
         uses: actions/checkout@v2
         with:
           submodules: 'recursive'
       - name: Prepare env
+        if: RUN_BUILD
         uses: actions/setup-node@v1
         with:
           node-version: 16.x
       - name: Build project
+        if: RUN_BUILD
         run: |
           yarn install
           yarn build
         env:
           CI: true
       - name: Deploy build to ${{ env.SITE_URL }}${{ env.PATH_PREFIX }}
+        if: RUN_BUILD
         uses: Cecilapp/GitHub-Pages-deploy@v3
         env:
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
