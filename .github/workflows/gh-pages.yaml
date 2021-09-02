@@ -31,9 +31,8 @@ jobs:
       PATH_PREFIX: /hunsalz.de
     steps:
       - name: Check preflight result
-        run: | 
-          echo ${{ needs.preflight.outputs.run_build }}
-          echo ${{ toJSON(needs.preflight.outputs) }}
+        if: ${{ needs.preflight.outputs.run_build == true }}
+        run: echo ${{ needs.preflight.outputs.run_build }}
       - name: Checkout project
         uses: actions/checkout@v2
         with:
