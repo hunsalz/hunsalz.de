@@ -1,7 +1,8 @@
 name: Deploy to GitHub Pages
 
-on: [push]
-  paths:
+on:
+  push:
+    paths:
       - '**' # includes
       - '!README.md' # excludes
 
