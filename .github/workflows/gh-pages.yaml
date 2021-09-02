@@ -12,21 +12,19 @@ jobs:
       SITE_TITLE: My home is my castle
       SITE_URL: https://hunsalz.github.io
       PATH_PREFIX: /hunsalz.de
-    strategy:
-      matrix:
-        node-version: [16.x]
     steps:
       - name: Preflight
-        run: echo "Preflight check ${{ env.GH_TOKEN_AVAILABLE && env.RUN_DEPLOYMENT && 'passed' || 'aborted' }}"
+        run: echo "GitHub token ${{ env.GH_TOKEN_AVAILABLE && 'available' || 'unavailable' }}"
+        run: echo "Auto deployment ${{ env.RUN_DEPLOYMENT && 'enabled' || 'skipped' }}"
         if: ${{ env.GH_TOKEN_AVAILABLE && env.RUN_DEPLOYMENT }}
       - name: Checkout project
         uses: actions/checkout@v2
         with:
           submodules: 'recursive'
-      - name: Prepare env (node -v ${{ matrix.node-version }})
+      - name: Prepare env
         uses: actions/setup-node@v1
         with:
-          node-version: ${{ matrix.node-version }}
+          node-version: 16.x
       - name: Build project
         run: |
           yarn install
