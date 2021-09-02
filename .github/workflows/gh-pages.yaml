@@ -38,8 +38,8 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
         with:
           build_dir: dist
-    deploy:
-      name: Deploy build
-      runs-on: ubuntu-latest
-      steps:
-        - name: Deploy
+  deploy:
+    name: Deploy build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy
