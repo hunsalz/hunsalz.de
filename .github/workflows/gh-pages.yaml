@@ -6,16 +6,16 @@ jobs:
   build:
     name: Run build
     runs-on: ubuntu-latest
-    env:
-      GH_TOKEN_AVAILABLE: ${{ secrets.GH_TOKEN && true || false }}
-      RUN_DEPLOYMENT: ${{ !contains(github.event.head_commit.message, 'skip deploy') && true || false }}
-      SITE_TITLE: My home is my castle
-      SITE_URL: https://hunsalz.github.io
-      PATH_PREFIX: /hunsalz.de
     strategy:
       matrix:
         node-version: [16.x]
     steps:
+      env:
+        GH_TOKEN_AVAILABLE: ${{ secrets.GH_TOKEN && true || false }}
+        RUN_DEPLOYMENT: ${{ !contains(github.event.head_commit.message, 'skip deploy') && true || false }}
+        SITE_TITLE: My home is my castle
+        SITE_URL: https://hunsalz.github.io
+        PATH_PREFIX: /hunsalz.de
       if: ${{ env.GH_TOKEN_AVAILABLE }}
       - name: Checkout project
         uses: actions/checkout@v2
