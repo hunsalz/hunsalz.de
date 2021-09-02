@@ -1,4 +1,4 @@
-name: Deploy to pages.github.com
+name: Deploy to GitHub Pages
 
 on: [push]
 
@@ -16,9 +16,9 @@ jobs:
       matrix:
         node-version: [16.x]
     steps:
-      - name: preflight
-        if: ${{ env.GH_TOKEN_AVAILABLE }}
-        run: echo "Run build & deploy"
+      - name: Preflight
+        run: echo "Preflight check ${{ env.GH_TOKEN_AVAILABLE && env.RUN_DEPLOYMENT $$ 'passed' || 'aborted' }}"
+        if: ${{ env.GH_TOKEN_AVAILABLE && env.RUN_DEPLOYMENT }}
       - name: Checkout project
         uses: actions/checkout@v2
         with:
@@ -33,7 +33,7 @@ jobs:
           yarn build
         env:
           CI: true
-      - name: Deploy build to ${{ env.SITE_URL }} ${{ env.PATH_PREFIX }}
+      - name: Deploy build to ${{ env.SITE_URL }}${{ env.PATH_PREFIX }}
         uses: Cecilapp/GitHub-Pages-deploy@v3
         env:
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
