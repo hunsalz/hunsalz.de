@@ -15,9 +15,10 @@ jobs:
       - name: Preflight
         id: preflight
         run: |
+          echo "Preflight results ..."
           echo "GitHub token ${{ env.GH_TOKEN_AVAILABLE && 'available' || 'unavailable' }}"
           echo "Auto deployment ${{ env.RUN_CI && 'enabled' || 'skipped' }}"
-          echo "::set-output name=run::${{ env.GH_TOKEN_AVAILABLE && env.RUN_CI }}"
+          echo "::set-output name=run_build::${{ env.GH_TOKEN_AVAILABLE && env.RUN_CI }}"
   build:
     name: Build
     needs: preflight
@@ -27,8 +28,10 @@ jobs:
       SITE_URL: https://hunsalz.github.io
       PATH_PREFIX: /hunsalz.de
     steps:
-      - name: Check
-        run: echo ${{needs.preflight.outputs.run}}
+      - name: Check preflight result
+        run: | 
+          echo ${{ needs.preflight.outputs.run_build }}
+          echo ${{ toJSON(needs.preflight.outputs) }}
       - name: Checkout project
         uses: actions/checkout@v2
         with:
