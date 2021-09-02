@@ -4,8 +4,8 @@
 // Changes here require a server restart.
 // To restart press CTRL + C in terminal and run `gridsome develop`
 
-const tailwind = require("tailwindcss");
-const postcssPlugins = [tailwind()];
+const tailwind = require("tailwindcss")
+const postcssPlugins = [tailwind()]
 
 module.exports = {
   siteName: process.env.SITE_TITLE,
@@ -61,4 +61,4 @@ module.exports = {
       },
     },
   },
-};
+}
