@@ -3,21 +3,32 @@ name: Deploy to GitHub Pages
 on: [push]
 
 jobs:
-  build:
-    name: Run build
+  preflight:
+    name: Preflight
     runs-on: ubuntu-latest
     env:
       GH_TOKEN_AVAILABLE: ${{ secrets.GH_TOKEN && true || false }}
       RUN_CI: ${{ !contains(github.event.head_commit.message, 'skip ci') && true || false }}
+    outputs:
+      preflight: ${{ steps.preflight.outputs.run }}
+    steps: 
+      - name: Preflight
+        id: preflight
+        run: |
+          echo "GitHub token ${{ env.GH_TOKEN_AVAILABLE && 'available' || 'unavailable' }}"
+          echo "Auto deployment ${{ env.RUN_CI && 'enabled' || 'skipped' }}"
+          echo "::set-output name=run::${{ env.GH_TOKEN_AVAILABLE && env.RUN_CI }}"
+  build:
+    name: Build
+    needs: preflight
+    runs-on: ubuntu-latest
+    env:
       SITE_TITLE: My home is my castle
       SITE_URL: https://hunsalz.github.io
       PATH_PREFIX: /hunsalz.de
     steps:
-      - name: Preflight
-        run: |
-          echo "GitHub token ${{ env.GH_TOKEN_AVAILABLE && 'available' || 'unavailable' }}"
-          echo "Auto deployment ${{ env.RUN_CI && 'enabled' || 'skipped' }}"
-        if: ${{ env.GH_TOKEN_AVAILABLE && env.RUN_CI }}
+      - name: Check
+        run: echo ${{needs.preflight.outputs.run}}
       - name: Checkout project
         uses: actions/checkout@v2
         with:
@@ -39,7 +50,8 @@ jobs:
         with:
           build_dir: dist
   deploy:
-    name: Deploy build
+    name: Deploy
+    needs: build
     runs-on: ubuntu-latest
     steps:
       - name: Deploy
