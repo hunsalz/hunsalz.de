@@ -1,4 +1,9 @@
 name: Deploy to GitHub Pages
+author: Markus Hunsalz
+description: Build & deploy to GitHub Pages
+branding:
+  icon: 'github'  
+  color: 'blue'
 
 on: [push]
 
@@ -10,14 +15,16 @@ jobs:
       GH_TOKEN_AVAILABLE: ${{ secrets.GH_TOKEN && true || false }}
       RUN_CI: ${{ !contains(github.event.head_commit.message, 'skip ci') && true || false }}
     outputs:
-      preflight: ${{ steps.preflight.outputs.run }}
+      preflight: ${{ steps.result.outputs.run_build }}
     steps: 
-      - name: Preflight
-        id: preflight
+      - name: Log
         run: |
-          echo "Preflight results ..."
+          echo "::group::Results"
           echo "GitHub token ${{ env.GH_TOKEN_AVAILABLE && 'available' || 'unavailable' }}"
           echo "Auto deployment ${{ env.RUN_CI && 'enabled' || 'skipped' }}"
+          echo "::endgroup::"
+      - name: Result
+        id: result
           echo "::set-output name=run_build::${{ env.GH_TOKEN_AVAILABLE && env.RUN_CI }}"
   build:
     name: Build
