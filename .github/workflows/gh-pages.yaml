@@ -17,7 +17,7 @@ jobs:
         node-version: [16.x]
     steps:
       - name: Preflight
-        run: echo "Preflight check ${{ env.GH_TOKEN_AVAILABLE && env.RUN_DEPLOYMENT $$ 'passed' || 'aborted' }}"
+        run: echo "Preflight check ${{ env.GH_TOKEN_AVAILABLE && env.RUN_DEPLOYMENT && 'passed' || 'aborted' }}"
         if: ${{ env.GH_TOKEN_AVAILABLE && env.RUN_DEPLOYMENT }}
       - name: Checkout project
         uses: actions/checkout@v2
