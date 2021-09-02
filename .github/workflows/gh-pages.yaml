@@ -1,9 +1,4 @@
 name: Deploy to GitHub Pages
-author: Markus Hunsalz
-description: Build & deploy to GitHub Pages
-branding:
-  icon: 'github'  
-  color: 'blue'
 
 on: [push]
 
