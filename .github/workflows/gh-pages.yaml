@@ -16,7 +16,7 @@ jobs:
       matrix:
         node-version: [16.x]
     steps:
-      if: ${{ env.GH_TOKEN_AVAILABLE && env.GH_RUN_DEPLOYMENT }}
+      if: ${{ env.GH_TOKEN_AVAILABLE }}
       - name: Checkout project
         uses: actions/checkout@v2
         with:
