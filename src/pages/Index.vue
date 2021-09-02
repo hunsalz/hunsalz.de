@@ -55,7 +55,7 @@ query Blog {
 </page-query>
 
 <script>
-import Social from "~/components/Social.vue";
+import Social from "~/components/Social.vue"
 export default {
   metaInfo: {
     title: "Hello, world!",
@@ -69,5 +69,5 @@ export default {
   components: {
     Social,
   },
-};
+}
 </script>
