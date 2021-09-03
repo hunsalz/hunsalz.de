@@ -18,6 +18,7 @@ jobs:
       run_ci: ${{ steps.result.outputs.run_ci }}
       project: ${{ steps.result.outputs.project }}
       test: ${{ steps.result.outputs.test }}
+      foo: ${{ steps.result.outputs.foo }}
     steps:
       - name: Fetch project data
         uses: ionos-deploy-now/retrieve-project-info-action@v1
@@ -29,15 +30,16 @@ jobs:
       - name: Log
         run: |
           echo "::group::Results"
-          echo "Project ${{ toJSON(steps.project) }}"
+          echo "Project ${{ toJSON(steps.project.outputs) }}"
           echo "Auto deployment ${{ env.RUN_CI == 'true' && 'enabled' || 'skipped' }}"
           echo "::endgroup::"
       - name: Result
         id: result
         run: |
           echo "::set-output name=run_ci::${{ env.RUN_CI == 'true' }}"
-          echo "::set-output name=project::${{ toJSON(steps.project) }}"
+          echo "::set-output name=project::${{ toJSON(steps.project.outputs) }}"
           echo "::set-output name=test::${{ steps.project.outputs.site-url }}"
+          echo "::set-output name=foo::{ "name": "foo", "payload": "123" }"
   build_and_deploy:
     name: Build & Deploy
     needs: preflight
@@ -48,3 +50,4 @@ jobs:
           echo ${{ needs.preflight.outputs.run_ci }}
           echo ${{ needs.preflight.outputs.project }}
           echo ${{ needs.preflight.outputs.test }}
+          echo ${{ needs.preflight.outputs.foo }}
