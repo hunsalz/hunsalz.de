@@ -43,6 +43,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       RUN_JOB: ${{ needs.preflight.outputs.run_ci }}
+      PROJECT: ${{ fromJSON(needs.preflight.outputs.project) }}
     steps:
       - name: Log
         run: |
