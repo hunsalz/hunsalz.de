@@ -43,10 +43,10 @@ jobs:
     runs-on: ubuntu-latest
     env:
       RUN_JOB: ${{ needs.preflight.outputs.run_ci }}
-      PROJECT: ${{ fromJSON(needs.preflight.outputs.project) }}
+      PROJECT: ""
     steps:
       - name: Log
         run: |
           echo ${{ env.RUN_JOB }}
-          echo ${{ env.PROJECT }}
+          echo ${{ fromJSON(needs.preflight.outputs.project).site-url }}
 
