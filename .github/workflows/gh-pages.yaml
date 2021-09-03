@@ -20,12 +20,15 @@ jobs:
         run: |
           echo "::group::Results"
           echo "${{ github.event.head_commit.message }} => ${{ env.RUN_CI }}"
-          echo "GitHub token ${{ env.GH_TOKEN_AVAILABLE && 'available' || 'unavailable' }}"
-          echo "Auto deployment ${{ env.RUN_CI && 'enabled' || 'skipped' }}"
+          echo "BOTH => ${{ env.GH_TOKEN_AVAILABLE == 'ture' && env.RUN_CI = 'true' }}"
+
+
+          echo "GitHub token ${{ env.GH_TOKEN_AVAILABLE = 'true' && 'available' || 'unavailable' }}"
+          echo "Auto deployment ${{ env.RUN_CI == 'true' && 'enabled' || 'skipped' }}"
           echo "::endgroup::"
       - name: Result
         id: result
-        run: echo "::set-output name=execute::${{ env.GH_TOKEN_AVAILABLE && env.RUN_CI }}"
+        run: echo "::set-output name=execute::${{ env.GH_TOKEN_AVAILABLE == 'ture' && env.RUN_CI = 'true' }}"
   build_and_deploy:
     name: Build & Deploy
     needs: preflight
