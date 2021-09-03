@@ -43,6 +43,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       RUN_CI: ${{ needs.preflight.outputs.run_ci }}
+      PROJECT: ${{ needs.preflight.outputs.project }}
     steps:
       - name: Checkout project
         if: ${{ env.RUN_CI == true }}

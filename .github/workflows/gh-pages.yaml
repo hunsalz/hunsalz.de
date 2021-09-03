@@ -35,6 +35,8 @@ jobs:
       SITE_URL: https://hunsalz.github.io
       PATH_PREFIX: /hunsalz.de
     steps:
+      - name: Log
+        run: echo ${{ env.RUN_CI }}
       - name: Checkout project
         if: ${{ env.RUN_CI == true }}
         uses: actions/checkout@v2
