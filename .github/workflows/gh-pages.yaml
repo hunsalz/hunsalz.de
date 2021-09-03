@@ -36,26 +36,26 @@ jobs:
       PATH_PREFIX: /hunsalz.de
     steps:
       - name: Result
-        run: echo $env.RUN_JOB
+        run: echo ${{ env.RUN_JOB }}
       - name: Checkout project
-        if: $env.RUN_JOB
+        if: ${{ env.RUN_JOB }}
         uses: actions/checkout@v2
         with:
           submodules: "recursive"
       - name: Prepare env
-        if: $env.RUN_JOB
+        if: ${{ env.RUN_JOB }}
         uses: actions/setup-node@v1
         with:
           node-version: 16.x
       - name: Build project
-        if: $env.RUN_JOB
+        if: ${{ env.RUN_JOB }}
         run: |
           yarn install
           yarn build
         env:
           CI: true
       - name: Deploy build to ${{ env.SITE_URL }}${{ env.PATH_PREFIX }}
-        if: $env.RUN_JOB
+        if: ${{ env.RUN_JOB }}
         uses: Cecilapp/GitHub-Pages-deploy@v3
         env:
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}

@@ -35,7 +35,7 @@ jobs:
         id: result
         run: |
           echo "::set-output name=run_ci::${{ env.RUN_CI == 'true' }}"
-          JSON=`echo '${{ steps.project.outputs }}' | jq -c '.'`
+          JSON=`echo '${{ toJSON(steps.project.outputs) }}' | jq -c '.'`
           echo "::set-output name=project::$JSON"
   build_and_deploy:
     name: Build & Deploy
@@ -49,4 +49,4 @@ jobs:
         run: |
           echo ${{ env.RUN_JOB }}
           echo ${{ env.PROJECT }}
-          echo "site-url = ${{ env.PROJECT.site-url }}"
+          echo "site-url = ${{ env.PROJECT[site-url] }}"
