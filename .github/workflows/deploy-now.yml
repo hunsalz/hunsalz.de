@@ -43,7 +43,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       RUN_JOB: ${{ needs.preflight.outputs.run_ci }}
-      PROJECT: ""
+      PROJECT: ${{ needs.preflight.outputs.project }}
     steps:
       - name: Set env
         run: echo "PRO=${{ fromJSON(needs.preflight.outputs.project) }}" >> $GITHUB_ENV
@@ -52,4 +52,7 @@ jobs:
           echo ${{ env.RUN_JOB }}
           echo ${{ fromJSON(needs.preflight.outputs.project).site-url }}
           echo ${{ env.PRO }}
+          echo ${{ env.PROJECT }}
+          echo ${{ env.PROJECT.site-url }}
+          echo ${{ fromJSON(env.PROJECT).site-url }}
 
