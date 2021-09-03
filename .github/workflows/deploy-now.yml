@@ -25,6 +25,12 @@ jobs:
           service-host: ${{ env.IONOS_SERVICE_HOST }}
           project: ${{ env.IONOS_PROJECT_ID }}
           api-key: ${{ secrets.IONOS_API_KEY }}
+      - name: Log
+        run: |
+          echo "::group::Results"
+          echo "Project ${{ toJSON(steps.project.outputs) }}"
+          echo "Auto deployment ${{ env.RUN_CI == 'true' && 'enabled' || 'skipped' }}"
+          echo "::endgroup::"
       - name: Result
         id: result
         run: |
@@ -38,4 +44,4 @@ jobs:
       - name: Log2
         run: |
           echo ${{ needs.preflight.outputs.run_ci }}
-          echo ${{ needs.preflight.outputs.project }}
+          echo ${{ fromJSON(needs.preflight.outputs.project) }}
