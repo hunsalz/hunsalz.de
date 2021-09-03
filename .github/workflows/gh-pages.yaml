@@ -19,11 +19,11 @@ jobs:
       - name: Log
         run: |
           echo "::group::Results"
-          echo "${{ github.event.head_commit.message }} => ${{ env.RUN_CI }}"
+          echo "${{ github.event.head_commit.message }} >> ${{ env.RUN_CI }}"
           echo "BOTH => ${{ env.GH_TOKEN_AVAILABLE == 'true' && env.RUN_CI == 'true' }}"
 
 
-          echo "GitHub token ${{ env.GH_TOKEN_AVAILABLE = 'true' && 'available' || 'unavailable' }}"
+          echo "GitHub token ${{ env.GH_TOKEN_AVAILABLE == 'true' && 'available' || 'unavailable' }}"
           echo "Auto deployment ${{ env.RUN_CI == 'true' && 'enabled' || 'skipped' }}"
           echo "::endgroup::"
       - name: Result
