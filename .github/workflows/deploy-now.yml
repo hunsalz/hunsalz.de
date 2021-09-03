@@ -53,23 +53,23 @@ jobs:
         with:
           submodules: 'recursive'
       - name: Setup project
-        if: ${{ env.RUN_CI == true }}
+        if: ${{ env.RUN_CI == 'true' }}
         uses: actions/setup-node@v1
         with:
           node-version: 12.16.x
       - name: Prepare project environment
-        if: ${{ env.RUN_CI == true }}
+        if: ${{ env.RUN_CI == 'true' }}
         run: |
           npm install yarn
           yarn install --frozen-lockfile
       - name: Build project
-        if: ${{ env.RUN_CI == true }}
+        if: ${{ env.RUN_CI == 'true' }}
         run: yarn build
         env:
           CI: true
           SITE_URL: ${{ fromJSON(env.PROJECT).site-url }}
       - name: Deploy build to ${{ fromJSON(env.PROJECT).site-url }}
-        if: ${{ env.RUN_CI == true }}
+        if: ${{ env.RUN_CI == 'true' }}
         uses: ionos-deploy-now/deploy-to-ionos-action@v1
         with:
           storage-quota: ${{ fromJSON(env.PROJECT).storage-quota }}
