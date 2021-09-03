@@ -45,9 +45,10 @@ jobs:
       RUN_JOB: ${{ needs.preflight.outputs.run_ci }}
       PROJECT: ""
     steps:
+      - name: Set env
+        run: echo "PRO=${{ fromJSON(needs.preflight.outputs.project) }}" >> $GITHUB_ENV
       - name: Log
         run: |
           echo ${{ env.RUN_JOB }}
-          PRO=${{ fromJSON(needs.preflight.outputs.project) }}
           echo ${{ $PRO.site-url }}
 
