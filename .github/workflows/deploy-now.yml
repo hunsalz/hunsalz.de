@@ -45,8 +45,10 @@ jobs:
       RUN_CI: ${{ needs.preflight.outputs.run_ci }}
       PROJECT: ${{ needs.preflight.outputs.project }}
     steps:
+      - name: Log
+        run: echo ${{ env.RUN_CI }}
       - name: Checkout project
-        if: ${{ env.RUN_CI == true }}
+        if: ${{ env.RUN_CI == 'true' }}
         uses: actions/checkout@v2
         with:
           submodules: 'recursive'
