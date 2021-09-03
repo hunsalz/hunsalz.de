@@ -50,5 +50,5 @@ jobs:
       - name: Log
         run: |
           echo ${{ env.RUN_JOB }}
-          echo ${{ $PRO.site-url }}
+          echo ${{ env.PRO.site-url }}
 
