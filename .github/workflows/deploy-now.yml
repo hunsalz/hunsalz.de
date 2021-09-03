@@ -37,8 +37,8 @@ jobs:
         id: result
         run: |
           echo "::set-output name=run_ci::${{ env.RUN_CI == 'true' }}"
-          JSON=`${{ toJSON(steps.project.outputs) }}' | jq -c '.'`
-          echo ${{ JSON }} 
+          JSON=$(`${{ toJSON(steps.project.outputs) }}' | jq -c '.'`)
+          echo $JSON
           echo "::set-output name=project::$JSON"
           echo "::set-output name=test::${{ steps.project.outputs.site-url }}"
           echo "::set-output name=foo::{ "name": "foo", "payload": "123" }"
