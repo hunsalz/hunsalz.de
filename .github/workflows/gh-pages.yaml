@@ -12,7 +12,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       GH_TOKEN_AVAILABLE: ${{ secrets.GH_TOKEN && true || false }}
-      RUN_CI: ${{ !contains(github.event.head_commit.message, 'skip ci') && false || true }}
+      RUN_CI: ${{ !contains(github.event.head_commit.message, 'skip ci') }}
     outputs:
       execute: ${{ steps.result.outputs.execute }}
     steps: 
