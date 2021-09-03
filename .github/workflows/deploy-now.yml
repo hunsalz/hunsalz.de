@@ -28,7 +28,7 @@ jobs:
       - name: Log
         run: |
           echo "::group::Results"
-          echo "Outputs ${{ steps.project.outputs }}"
+          echo "Outputs ${{ fromJSON(steps.project.outputs) }}"
           echo "Auto deployment ${{ env.RUN_CI == 'true' && 'enabled' || 'skipped' }}"
           echo "::endgroup::"
       - name: Result
@@ -42,5 +42,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Log
-        run: echo ${{ needs.preflight.outputs.project }}
+        run: |
+          echo ${{ needs.preflight.outputs.run_ci }}
+          echo ${{ needs.preflight.outputs.project }}
   
