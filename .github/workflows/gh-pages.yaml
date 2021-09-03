@@ -14,7 +14,7 @@ jobs:
       GH_TOKEN_AVAILABLE: ${{ secrets.GH_TOKEN && true || false }}
       RUN_CI: ${{ !contains(github.event.head_commit.message, 'skip ci') }}
     outputs:
-      execute: ${{ steps.result.outputs.execute }}
+      run_ci: ${{ steps.result.outputs.run_ci }}
     steps: 
       - name: Log
         run: |
@@ -22,19 +22,18 @@ jobs:
           echo "${{ github.event.head_commit.message }} >> ${{ env.RUN_CI }}"
           echo "BOTH => ${{ env.GH_TOKEN_AVAILABLE == 'true' && env.RUN_CI == 'true' }}"
 
-
           echo "GitHub token ${{ env.GH_TOKEN_AVAILABLE == 'true' && 'available' || 'unavailable' }}"
           echo "Auto deployment ${{ env.RUN_CI == 'true' && 'enabled' || 'skipped' }}"
           echo "::endgroup::"
       - name: Result
         id: result
-        run: echo "::set-output name=execute::${{ env.GH_TOKEN_AVAILABLE == 'true' && env.RUN_CI == 'true' }}"
+        run: echo "::set-output name=run_ci::toJSON(${{ env.GH_TOKEN_AVAILABLE == 'true' && env.RUN_CI == 'true' }})"
   build_and_deploy:
     name: Build & Deploy
     needs: preflight
     runs-on: ubuntu-latest
     env:
-      RUN_JOB: ${{ needs.preflight.outputs.execute }}
+      RUN_JOB: fromJSON(${{ needs.preflight.outputs.run_ci }})
       SITE_TITLE: My home is my castle
       SITE_URL: https://hunsalz.github.io
       PATH_PREFIX: /hunsalz.de
