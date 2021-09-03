@@ -29,21 +29,21 @@ jobs:
       - name: Log
         run: |
           echo "::group::Results"
-          echo "Project ${{ toJSON(steps.project.outputs) }}"
+          echo "Project ${{ toJSON(steps.project) }}"
           echo "Auto deployment ${{ env.RUN_CI == 'true' && 'enabled' || 'skipped' }}"
           echo "::endgroup::"
       - name: Result
         id: result
         run: |
           echo "::set-output name=run_ci::${{ env.RUN_CI == 'true' }}"
-          echo "::set-output name=project::${{ toJSON(steps.project.outputs) }}"
+          echo "::set-output name=project::${{ toJSON(steps.project) }}"
           echo "::set-output name=test::${{ steps.project.outputs.site-url }}"
   build_and_deploy:
     name: Build & Deploy
     needs: preflight
     runs-on: ubuntu-latest
     steps:
-      - name: Log2
+      - name: Log
         run: |
           echo ${{ needs.preflight.outputs.run_ci }}
           echo ${{ needs.preflight.outputs.project }}
