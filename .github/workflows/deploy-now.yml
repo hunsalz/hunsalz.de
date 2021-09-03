@@ -33,7 +33,7 @@ jobs:
           echo "::endgroup::"
       - name: Result
         id: result
-        run: | 
+        run: |
           echo "::set-output name=run_ci::${{ env.RUN_CI == 'true' }}"
           echo "::set-output name=project::${{ toJSON(steps.project.outputs) }}"
   build_and_deploy:
