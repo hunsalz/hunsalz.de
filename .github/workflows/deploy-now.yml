@@ -11,19 +11,19 @@ jobs:
     name: Preflight
     runs-on: ubuntu-latest
     env:
-      DN_SERVICE_HOST: 'api-eu.ionos.space'
-      DN_PROJECT_ID: '99dd94df-fa02-402b-b5a8-5c19327e0628'
+      IONOS_SERVICE_HOST: 'api-eu.ionos.space'
+      IONOS_PROJECT_ID: '99dd94df-fa02-402b-b5a8-5c19327e0628'
       RUN_CI: ${{ !contains(github.event.head_commit.message, 'skip ci') }}
-      CONFIG: ${{ steps.project }}
     outputs:
-      config: ${{ env.CONFIG }}
+      run_ci: ${{ steps.result.outputs.run_ci }}
+      project: ${{ steps.result.outputs.project }}
     steps:
       - name: Fetch project data
         uses: ionos-deploy-now/retrieve-project-info-action@v1
         id: project
         with:
-          service-host: ${{ env.DN_SERVICE_HOST }}
-          project: ${{ env.DN_PROJECT_ID }}
+          service-host: ${{ env.IONOS_SERVICE_HOST }}
+          project: ${{ env.IONOS_PROJECT_ID }}
           api-key: ${{ secrets.IONOS_API_KEY }}
       - name: Log
         run: |
@@ -33,12 +33,14 @@ jobs:
           echo "::endgroup::"
       - name: Result
         id: result
-        run: echo "::set-output name=run_ci::${{ env.RUN_CI == 'true' }}"
+        run: | 
+          echo "::set-output name=run_ci::${{ env.RUN_CI == 'true' }}"
+          echo "::set-output name=project::${{ toJSON(steps.project.outputs) }}"
   build_and_deploy:
     name: Build & Deploy
     needs: preflight
     runs-on: ubuntu-latest
     steps:
       - name: Log
-        run: echo ${{ needs.preflight.outputs.config }}
+        run: echo ${{ needs.preflight.outputs.project }}
   
