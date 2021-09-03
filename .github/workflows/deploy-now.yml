@@ -28,7 +28,7 @@ jobs:
       - name: Log
         run: |
           echo "::group::Results"
-          echo "Outputs ${{ fromJSON(steps.project.outputs) }}"
+          echo "Project ${{ fromJSON(steps.project.outputs) }}"
           echo "Auto deployment ${{ env.RUN_CI == 'true' && 'enabled' || 'skipped' }}"
           echo "::endgroup::"
       - name: Result
