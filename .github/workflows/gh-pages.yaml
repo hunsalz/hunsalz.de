@@ -3,8 +3,8 @@ name: Deploy to GitHub Pages
 on:
   push:
     paths:
-      - '**' # includes
-      - '!README.md' # excludes
+      - "**" # includes
+      - "!README.md" # excludes
 
 jobs:
   preflight:
@@ -41,7 +41,7 @@ jobs:
         if: ${{ env.RUN_JOB == 'true' }}
         uses: actions/checkout@v2
         with:
-          submodules: 'recursive'
+          submodules: "recursive"
       - name: Prepare env
         if: ${{ env.RUN_JOB == 'true' }}
         uses: actions/setup-node@v1
