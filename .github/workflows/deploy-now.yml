@@ -49,4 +49,4 @@ jobs:
         run: |
           echo ${{ env.RUN_JOB }}
           echo ${{ env.PROJECT }}
-          echo ${{ env.PROJECT.site-url }}
+          echo "site-url = ${{ env.PROJECT.site-url }}"
