@@ -39,6 +39,6 @@ jobs:
     needs: preflight
     runs-on: ubuntu-latest
     steps:
-      name: Log
-      run: echo ${{ needs.preflight.outputs.config }}
+      - name: Log
+        run: echo ${{ needs.preflight.outputs.config }}
   
