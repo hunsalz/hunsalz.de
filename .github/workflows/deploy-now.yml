@@ -14,8 +14,9 @@ jobs:
       DN_SERVICE_HOST: 'api-eu.ionos.space'
       DN_PROJECT_ID: '99dd94df-fa02-402b-b5a8-5c19327e0628'
       RUN_CI: ${{ !contains(github.event.head_commit.message, 'skip ci') }}
+      CONFIG: ${{ steps.project }}
     outputs:
-      run_ci: ${{ steps.result.outputs.run_ci }}
+      config: ${{ env.CONFIG }}
     steps:
       - name: Fetch project data
         uses: ionos-deploy-now/retrieve-project-info-action@v1
@@ -33,4 +34,11 @@ jobs:
       - name: Result
         id: result
         run: echo "::set-output name=run_ci::${{ env.RUN_CI == 'true' }}"
+  build_and_deploy:
+    name: Build & Deploy
+    needs: preflight
+    runs-on: ubuntu-latest
+    steps:
+      name: Log
+      run: echo ${{ needs.preflight.outputs.config }}
   
