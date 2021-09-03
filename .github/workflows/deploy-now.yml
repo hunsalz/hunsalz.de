@@ -17,7 +17,6 @@ jobs:
     outputs:
       run_ci: ${{ steps.result.outputs.run_ci }}
       project: ${{ steps.result.outputs.project }}
-      test: ${{ steps.result.outputs.test }}
       foo: ${{ steps.result.outputs.foo }}
     steps:
       - name: Fetch project data
@@ -40,7 +39,6 @@ jobs:
           JSON=`echo '${{ toJSON(steps.project.outputs) }}' | jq -c '.'`
           echo $JSON
           echo "::set-output name=project::$JSON"
-          echo "::set-output name=test::${{ steps.project.outputs.site-url }}"
           echo "::set-output name=foo::{ "name": "foo", "payload": "123" }"
   build_and_deploy:
     name: Build & Deploy
@@ -51,5 +49,5 @@ jobs:
         run: |
           echo ${{ needs.preflight.outputs.run_ci }}
           echo ${{ needs.preflight.outputs.project }}
-          echo ${{ needs.preflight.outputs.test }}
+          echo ${{ fromJSON(needs.preflight.outputs.project) }}
           echo ${{ needs.preflight.outputs.foo }}
