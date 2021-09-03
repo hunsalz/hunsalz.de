@@ -29,7 +29,7 @@ jobs:
         run: |
           echo "::group::Results"
           echo "Project ${{ toJSON(steps.project.outputs) }}"
-          echo "Auto deployment ${{ env.RUN_CI == 'true' && 'enabled' || 'skipped' }}"
+          echo "Auto deployment "
           echo "::endgroup::"
       - name: Result
         id: result
