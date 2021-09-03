@@ -12,14 +12,14 @@ jobs:
     runs-on: ubuntu-latest
     env:
       GH_TOKEN_AVAILABLE: ${{ secrets.GH_TOKEN && true || false }}
-      RUN_CI: ${{ contains(github.event.head_commit.message, 'skip ci') && 'false' || 'true' }}
+      RUN_CI: ${{ !contains(github.event.head_commit.message, 'skip ci') && false || true }}
     outputs:
       execute: ${{ steps.result.outputs.execute }}
     steps: 
       - name: Log
         run: |
           echo "::group::Results"
-          echo "${{ github.event.head_commit.message }} - ${{ contains(github.event.head_commit.message, 'skip ci') }}"
+          echo "${{ github.event.head_commit.message }} - ${{ !contains(github.event.head_commit.message, 'skip ci') }}"
           echo "GitHub token ${{ env.GH_TOKEN_AVAILABLE && 'available' || 'unavailable' }}"
           echo "Auto deployment ${{ env.RUN_CI && 'enabled' || 'skipped' }}"
           echo "::endgroup::"
