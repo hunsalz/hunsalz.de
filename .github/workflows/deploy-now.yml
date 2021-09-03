@@ -48,4 +48,5 @@ jobs:
       - name: Log
         run: |
           echo ${{ env.RUN_JOB }}
+          echo ${{ env.PROJECT }}
           echo ${{ env.PROJECT.site-url }}
