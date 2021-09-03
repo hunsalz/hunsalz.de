@@ -17,7 +17,6 @@ jobs:
     outputs:
       run_ci: ${{ steps.result.outputs.run_ci }}
       project: ${{ steps.result.outputs.project }}
-      foo: ${{ steps.result.outputs.foo }}
     steps:
       - name: Fetch project data
         uses: ionos-deploy-now/retrieve-project-info-action@v1
@@ -37,17 +36,16 @@ jobs:
         run: |
           echo "::set-output name=run_ci::${{ env.RUN_CI == 'true' }}"
           JSON=`echo '${{ toJSON(steps.project.outputs) }}' | jq -c '.'`
-          echo $JSON
           echo "::set-output name=project::$JSON"
-          echo "::set-output name=foo::{ "name": "foo", "payload": "123" }"
   build_and_deploy:
     name: Build & Deploy
     needs: preflight
     runs-on: ubuntu-latest
+    env:
+      RUN_JOB: ${{ needs.preflight.outputs.run_ci }}
+      PROJECT: ${{ fromJSON(needs.preflight.outputs.project) }}
     steps:
       - name: Log
         run: |
-          echo ${{ needs.preflight.outputs.run_ci }}
-          echo ${{ needs.preflight.outputs.project }}
-          echo ${{ fromJSON(needs.preflight.outputs.project) }}
-          echo ${{ needs.preflight.outputs.foo }}
+          echo $RUN_JOB
+          echo $PROJECT.site-url
