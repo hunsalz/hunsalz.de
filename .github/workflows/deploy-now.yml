@@ -37,7 +37,8 @@ jobs:
         id: result
         run: |
           echo "::set-output name=run_ci::${{ env.RUN_CI == 'true' }}"
-          echo "::set-output name=project::${{ toJSON(steps.project.outputs) }}"
+          JSON=$(jq -c '.' ${{ toJSON(steps.project.outputs) }})
+          echo "::set-output name=project::$JSON"
           echo "::set-output name=test::${{ steps.project.outputs.site-url }}"
           echo "::set-output name=foo::{ "name": "foo", "payload": "123" }"
   build_and_deploy:
@@ -51,3 +52,4 @@ jobs:
           echo ${{ needs.preflight.outputs.project }}
           echo ${{ needs.preflight.outputs.test }}
           echo ${{ needs.preflight.outputs.foo }}
+          echo ${{ fromJSON(needs.preflight.outputs.foo).name }}
