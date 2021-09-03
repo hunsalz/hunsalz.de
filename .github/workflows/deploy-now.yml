@@ -50,5 +50,6 @@ jobs:
       - name: Log
         run: |
           echo ${{ env.RUN_JOB }}
-          echo ${{ env.PRO.site-url }}
+          echo ${{ fromJSON(needs.preflight.outputs.project).site-url }}
+          echo ${{ env.PRO }}
 
