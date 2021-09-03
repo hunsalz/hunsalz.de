@@ -19,7 +19,7 @@ jobs:
       - name: Log
         run: |
           echo "::group::Results"
-          echo "${{ github.event.head_commit.message }} - ${{ !contains(github.event.head_commit.message, 'skip ci') }}"
+          echo "${{ github.event.head_commit.message }} => ${{ env.RUN_CI }}"
           echo "GitHub token ${{ env.GH_TOKEN_AVAILABLE && 'available' || 'unavailable' }}"
           echo "Auto deployment ${{ env.RUN_CI && 'enabled' || 'skipped' }}"
           echo "::endgroup::"
