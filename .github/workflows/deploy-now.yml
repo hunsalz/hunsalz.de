@@ -6,10 +6,10 @@ on:
       - "**" # includes
       - "!README.md" # excludes
 
-jobs:
-  env:
-    TEST: "MY TEST"
+env:
+  TEST: "MY TEST"
 
+jobs:
   preflight:
     name: Preflight
     runs-on: ubuntu-latest
