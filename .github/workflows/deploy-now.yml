@@ -39,8 +39,6 @@ jobs:
           JSON=`echo '${{ toJSON(steps.project.outputs) }}' | jq -c '.'`
           echo "::set-output name=project::$JSON"
           echo ${{ env.TEST }}
-          echo "TEST=Lorem Ipsum" >> $env:GITHUB_ENV
-          echo ${{ env.TEST }}
   build_and_deploy:
     name: Build & Deploy
     needs: preflight
