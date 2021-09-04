@@ -30,7 +30,7 @@ jobs:
         run: | 
           echo "::set-output name=run_ci::${{ env.GH_TOKEN_AVAILABLE == 'true' && env.RUN_CI == 'true' }}"
           echo ${{ env.TEST }}
-          echo "TEST=LOREM" >> $env:GITHUB_ENV
+          echo "TEST=LOREM" >> $GITHUB_ENV
       - name: Log2
         run: echo ${{ env.TEST }}
   build_and_deploy:
