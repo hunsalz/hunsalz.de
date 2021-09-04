@@ -6,6 +6,9 @@ on:
       - "**" # includes
       - "!README.md" # excludes
 
+env:
+  TEST: "TEST"
+
 jobs:
   preflight:
     name: Preflight
@@ -24,7 +27,11 @@ jobs:
           echo "::endgroup::"
       - name: Result
         id: result
-        run: echo "::set-output name=run_ci::${{ env.GH_TOKEN_AVAILABLE == 'true' && env.RUN_CI == 'true' }}"
+        run: | 
+          echo "::set-output name=run_ci::${{ env.GH_TOKEN_AVAILABLE == 'true' && env.RUN_CI == 'true' }}"
+          echo ${{ env.TEST }}
+          echo "TEST=LOREM" >> $env:GITHUB_ENV
+          echo ${{ env.TEST }}
   build_and_deploy:
     name: Build & Deploy
     needs: preflight
@@ -36,7 +43,9 @@ jobs:
       PATH_PREFIX: /hunsalz.de
     steps:
       - name: Log
-        run: echo ${{ env.RUN_CI }}
+        run: | 
+          echo ${{ env.RUN_CI }}
+          echo ${{ env.TEST }}
       - name: Checkout project
         if: ${{ env.RUN_CI == 'true' }}
         uses: actions/checkout@v2
