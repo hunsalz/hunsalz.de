@@ -7,12 +7,13 @@ on:
       - "!README.md" # excludes
 
 jobs:
+  env:
+    TEST: "MY TEST"
+
   preflight:
     name: Preflight
     runs-on: ubuntu-latest
     env:
-      IONOS_SERVICE_HOST: "api-eu.ionos.space"
-      IONOS_PROJECT_ID: "99dd94df-fa02-402b-b5a8-5c19327e0628"
       RUN_CI: ${{ !contains(github.event.head_commit.message, 'skip ci') }}
     outputs:
       run_ci: ${{ steps.result.outputs.run_ci }}
@@ -37,16 +38,23 @@ jobs:
           echo "::set-output name=run_ci::${{ steps.project.outputs.deployment-enabled == 'true' && env.RUN_CI == 'true' }}"
           JSON=`echo '${{ toJSON(steps.project.outputs) }}' | jq -c '.'`
           echo "::set-output name=project::$JSON"
+          echo ${{ env.TEST }}
+          echo "TEST=Lorem Ipsum" >> $env:GITHUB_ENV
+          echo ${{ env.TEST }}
   build_and_deploy:
     name: Build & Deploy
     needs: preflight
     runs-on: ubuntu-latest
     env:
+      IONOS_SERVICE_HOST: "api-eu.ionos.space"
+      IONOS_PROJECT_ID: "99dd94df-fa02-402b-b5a8-5c19327e0628"
       RUN_CI: ${{ needs.preflight.outputs.run_ci }}
       PROJECT: ${{ needs.preflight.outputs.project }}
     steps:
       - name: Log
-        run: echo ${{ env.RUN_CI }}
+        run: |
+          echo ${{ env.RUN_CI }}
+          echo ${{ env.TEST }}
       - name: Checkout project
         if: ${{ env.RUN_CI == 'true' }}
         uses: actions/checkout@v2
@@ -72,10 +80,10 @@ jobs:
         uses: ionos-deploy-now/deploy-to-ionos-action@v1
         with:
           storage-quota: ${{ fromJSON(env.PROJECT).storage-quota }}
-          project: 99dd94df-fa02-402b-b5a8-5c19327e0628
+          project: ${{ env.IONOS_PROJECT_ID }}
           dist-folder: dist
           remote-host: ${{ fromJSON(env.PROJECT).remote-host }}
           api-key: ${{ secrets.IONOS_API_KEY }}
-          service-host: api-eu.ionos.space
+          service-host: ${{ env.IONOS_SERVICE_HOST }}
           branch-id: ${{ fromJSON(env.PROJECT).branch-id }}
 
