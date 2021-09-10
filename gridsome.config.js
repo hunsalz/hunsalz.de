@@ -4,9 +4,6 @@
 // Changes here require a server restart.
 // To restart press CTRL + C in terminal and run `gridsome develop`
 
-const tailwind = require("tailwindcss")
-const postcssPlugins = [tailwind()]
-
 module.exports = {
   siteName: process.env.SITE_TITLE,
   siteUrl: process.env.SITE_URL,
@@ -18,6 +15,15 @@ module.exports = {
         path: "blog/**/*.md",
         typeName: "Post",
         remark: {},
+      },
+    },
+    {
+      use: "gridsome-plugin-windicss",
+      options: {
+        purgeConfig: {
+          // Prevent purging of prism classes.
+          whitelistPatternsChildren: [/token$/],
+        },
       },
     },
     {
@@ -39,26 +45,8 @@ module.exports = {
               tabIndex: -1,
             },
           },
-        ],
-        [
-          "gridsome-plugin-remark-prismjs-all",
-          {
-            showLineNumbers: true,
-            aliases: {
-              vue: "html",
-              cmd: "bash",
-              dos: "bash",
-            },
-          },
-        ],
+        ]
       ],
     },
-  },
-  css: {
-    loaderOptions: {
-      postcss: {
-        plugins: postcssPlugins,
-      },
-    },
-  },
+  }
 }

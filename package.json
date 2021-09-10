@@ -15,14 +15,15 @@
     "explore": "gridsome explore"
   },
   "dependencies": {
+    "gridsome": "^0.7.23",
+    "vue-material-design-icons": "^4.12.1"
+  },
+  "devDependencies": {
     "@gridsome/plugin-sitemap": "^0.4.0",
     "@gridsome/source-filesystem": "^0.6.2",
     "@gridsome/transformer-remark": "^0.6.4",
-    "@tailwindcss/typography": "^0.4.1",
-    "autoprefixer": "^10.3.3",
-    "gridsome": "^0.7.23",
-    "gridsome-plugin-remark-prismjs-all": "^0.4.8",
-    "postcss": "^8.3.6",
-    "tailwindcss": "^2.2.9"
+    "gridsome-plugin-windicss": "^1.0.3",
+    "node-sass": "^6.0.1",
+    "sass-loader": "^10.1.1"
   }
 }
