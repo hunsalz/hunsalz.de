@@ -1,81 +1,47 @@
-name: Deploy to IONOS
+name: Deploy Now
 
-on:
-  push:
-    paths:
-      - "**" # includes
-      - "!README.md" # excludes
+on: [push]
 
 jobs:
-  preflight:
-    name: Preflight
+  deploy-now:
     runs-on: ubuntu-latest
-    env:
-      RUN_CI: ${{ !contains(github.event.head_commit.message, 'skip ci') }}
-    outputs:
-      run_ci: ${{ steps.result.outputs.run_ci }}
-      project: ${{ steps.result.outputs.project }}
     steps:
       - name: Fetch project data
         uses: ionos-deploy-now/retrieve-project-info-action@v1
         id: project
         with:
-          service-host: ${{ env.IONOS_SERVICE_HOST }}
-          project: ${{ env.IONOS_PROJECT_ID }}
+          service-host: api-eu.ionos.space
+          project: 0cea6e10-8229-4b8a-9841-f9372ac305db
           api-key: ${{ secrets.IONOS_API_KEY }}
-      - name: Log
-        run: |
-          echo "::group::Results"
-          echo "Project ${{ toJSON(steps.project.outputs) }}"
-          echo "Auto deployment ${{ env.RUN_CI == 'true' && 'enabled' || 'skipped' }}"
-          echo "::endgroup::"
-      - name: Result
-        id: result
-        run: |
-          echo "::set-output name=run_ci::${{ steps.project.outputs.deployment-enabled == 'true' && env.RUN_CI == 'true' }}"
-          JSON=`echo '${{ toJSON(steps.project.outputs) }}' | jq -c '.'`
-          echo "::set-output name=project::$JSON"
-  build_and_deploy:
-    name: Build & Deploy
-    needs: preflight
-    runs-on: ubuntu-latest
-    env:
-      IONOS_SERVICE_HOST: "api-eu.ionos.space"
-      IONOS_PROJECT_ID: "99dd94df-fa02-402b-b5a8-5c19327e0628"
-      RUN_CI: ${{ needs.preflight.outputs.run_ci }}
-      PROJECT: ${{ needs.preflight.outputs.project }}
-    steps:
-      - name: Log
-        run: echo ${{ env.RUN_CI }}
-      - name: Checkout project
-        if: ${{ env.RUN_CI == 'true' }}
+      - name: checkout
+        if: ${{ steps.project.outputs.deployment-enabled == 'true' }}
         uses: actions/checkout@v2
         with:
           submodules: 'recursive'
-      - name: Setup project
-        if: ${{ env.RUN_CI == 'true' }}
+      - name: Setup Node.js 12.16.x
+        if: ${{ steps.project.outputs.deployment-enabled == 'true' }}
         uses: actions/setup-node@v1
         with:
           node-version: 12.16.x
       - name: Prepare project environment
-        if: ${{ env.RUN_CI == 'true' }}
+        if: ${{ steps.project.outputs.deployment-enabled == 'true' }}
         run: |
+          npm install --global yarn
           yarn install --frozen-lockfile
       - name: Build project
-        if: ${{ env.RUN_CI == 'true' }}
+        if: ${{ steps.project.outputs.deployment-enabled == 'true' }}
         run: yarn build
         env:
+          SITE_URL: ${{ steps.project.outputs.site-url }}
           CI: true
-          SITE_URL: ${{ fromJSON(env.PROJECT).site-url }}
-      - name: Deploy build to ${{ fromJSON(env.PROJECT).site-url }}
-        if: ${{ env.RUN_CI == 'true' }}
+      - name: Deploy build
+        if: ${{ steps.project.outputs.deployment-enabled == 'true' }}
         uses: ionos-deploy-now/deploy-to-ionos-action@v1
         with:
-          storage-quota: ${{ fromJSON(env.PROJECT).storage-quota }}
-          project: ${{ env.IONOS_PROJECT_ID }}
+          service-host: api-eu.ionos.space
+          branch-id: ${{ steps.project.outputs.branch-id }}
+          storage-quota: ${{ steps.project.outputs.storage-quota }}
+          project: 0cea6e10-8229-4b8a-9841-f9372ac305db
           dist-folder: dist
-          remote-host: ${{ fromJSON(env.PROJECT).remote-host }}
+          remote-host: ${{ steps.project.outputs.remote-host }}
           api-key: ${{ secrets.IONOS_API_KEY }}
-          service-host: ${{ env.IONOS_SERVICE_HOST }}
-          branch-id: ${{ fromJSON(env.PROJECT).branch-id }}
-
