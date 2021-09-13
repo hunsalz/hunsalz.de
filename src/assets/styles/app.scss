@@ -48,10 +48,6 @@ html.dark {
     background-color: var(--color-midnight);
   }
 
-  .deploy-now-logo {
-    filter: brightness(0) invert(1);
-  }
-
   .next.logo, .jekyll.logo {
     filter: invert(1);
   }
