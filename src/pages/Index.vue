@@ -1,10 +1,10 @@
 <template>
   <Layout>
-    <div class="flex h-screen justify-center items-center bg-gray-500">
+    <div class="flex h-screen justify-center items-center bg-gray-400">
       <div class="m-auto">
-        <h1 class="text-4xl text-center pb-4 text-white">Markus Hunsalz</h1>
+        <h1 class="text-8xl text-center pb-4 text-white line-through underline-12 underline-gray-400">Markus Hunsalz</h1>
         <Social />
-        <p class="text-2xl text-center pb-4 text-white">Re-think common design patterns</p>
+        <p class="text-3xl text-center pb-4 text-white">Re-think common design patterns</p>
       </div>
     </div>
   </Layout>
