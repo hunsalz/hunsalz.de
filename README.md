@@ -1,3 +1,3 @@
-![Deploy Now](https://github.com/hunsalz/hunsalz.de/actions/workflows/ionos-space.yml/badge.svg?branch=main)
+![Deploy Now](https://github.com/hunsalz/hunsalz.de/actions/workflows/deploy-now.yml/badge.svg?branch=gridsome)
 
 # Personal website: hunsalz.de
