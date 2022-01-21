@@ -64,6 +64,12 @@ jobs:
           yarn build
         env:
           CI: true
+      - name: Compress build output
+        uses: ThiagoJaweb/ghaction-CompressFiles@v1.0.3
+        with:
+          path: dist
+          extensions: '.js,.css,.html'
+          tools: 'brotli,gzip'
       - name: Deploy build to ${{ env.SITE_URL }}${{ env.PATH_PREFIX }}
         if: ${{ env.RUN_CI == 'true' }}
         uses: Cecilapp/GitHub-Pages-deploy@v3
