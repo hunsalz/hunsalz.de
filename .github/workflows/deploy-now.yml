@@ -34,6 +34,12 @@ jobs:
         env:
           SITE_URL: ${{ steps.project.outputs.site-url }}
           CI: true
+      - name: Compress build output
+        uses: ThiagoJaweb/ghaction-CompressFiles@v1.0.3
+        with:
+          path: dist
+          extensions: '.js,.css,.html'
+          tools: 'brotli,gzip'
       - name: Deploy to ${{ steps.project.outputs.site-url }}
         if: ${{ steps.project.outputs.deployment-enabled == 'true' }}
         uses: ionos-deploy-now/deploy-to-ionos-action@v1
