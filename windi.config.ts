@@ -26,7 +26,8 @@ export default {
     },
     container: {
       center: true,
-      padding: '1rem',
+      margin: '0rem',
+      padding: '0rem',
     },
   },
   scan: {

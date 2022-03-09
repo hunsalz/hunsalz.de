@@ -1,6 +1,6 @@
 <template>
   <Layout>
-    <div class="flex h-screen justify-center items-center bg-gray-400">
+    <div class="flex h-screen justify-center items-center m-0 p-0 bg-gray-400">
       <div class="m-auto">
         <h1 class="text-8xl text-center pb-4 text-white line-through underline-12 underline-gray-400">Markus Hunsalz</h1>
         <Social />

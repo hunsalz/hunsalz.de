@@ -12,7 +12,9 @@
   "scripts": {
     "build": "gridsome build",
     "develop": "gridsome develop",
-    "explore": "gridsome explore"
+    "explore": "gridsome explore",
+    "markdown:lint": "markdownlint '**/*.md' --ignore node_modules",
+    "markdown:fix": "markdownlint '**/*.md' --ignore node_modules --fix"
   },
   "dependencies": {
     "gridsome": "^0.7.23",
@@ -24,6 +26,7 @@
     "@gridsome/transformer-remark": "^0.6.4",
     "gridsome-plugin-windicss": "^1.0.5",
     "node-sass": "^6.0.1",
-    "sass-loader": "^10.1.1"
+    "sass-loader": "^10.1.1",
+    "markdownlint-cli": "0.23.2"
   }
 }
