@@ -4,4 +4,10 @@
 
 # Just my personal website
 
-test builds
+Deployments:
+
+* Deploy Now: https://hunsalz.de
+* Netlify: https://hunsalz-de.netlify.app
+* Vercel: https://hunsalz-de.vercel.app
+* Stormkit: https://hunsalz-de.stormkit.dev
+* Digital Ocean: https://hunsalz-de-qszry.ondigitalocean.app
