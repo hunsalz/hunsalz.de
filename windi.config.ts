@@ -25,9 +25,7 @@ export default {
       },
     },
     container: {
-      center: true,
-      margin: '0rem',
-      padding: '0rem',
+      center: true
     },
   },
   scan: {
