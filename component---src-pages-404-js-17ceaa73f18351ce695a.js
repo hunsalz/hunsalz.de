@@ -1,0 +1,2 @@
+(self.webpackChunkhunsalz_de=self.webpackChunkhunsalz_de||[]).push([[883],{9616:function(e,n,t){"use strict";t.r(n);var l=t(7294),a=t(4252);n.default=function(){return l.createElement(a.Z,{darkText:!0},l.createElement("h1",null,"NOT FOUND"),l.createElement("p",null,"Not a valid URL"))}}}]);
+//# sourceMappingURL=component---src-pages-404-js-17ceaa73f18351ce695a.js.map
