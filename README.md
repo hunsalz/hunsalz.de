@@ -7,6 +7,7 @@
 Deployments:
 
 * Deploy Now: https://hunsalz.de
+* GitHub Pages: https://hunsalz.github.io/hunsalz.de/
 * Netlify: https://hunsalz-de.netlify.app
 * Vercel: https://hunsalz-de.vercel.app
 * Stormkit: https://hunsalz-de.stormkit.dev
