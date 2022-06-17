@@ -32,6 +32,39 @@ module.exports = {
         include: ["/", "/blog/**"],
       },
     },
+    {
+      use: "gridsome-plugin-htaccess",
+      options: {
+        textCompression: [
+          "text/html",
+          "application/javascript",
+          "text/css",
+          "image/png",
+        ],
+        redirections: [],
+        forceHttps: true,
+        disableDirectoryIndex: true,
+        disableServerSignature: true,
+        pingable: false,
+        // preventScriptInjection: true,
+        contentSecurityPolicy: {
+          "default-src": ["self"],
+          "connect-src": ["self", "data:"],
+          "font-src": ["self", "data:"],
+          "frame-src": ["self", "data:"],
+          "img-src": ["self", "data:"],
+          "script-src": ["self", "data:"],
+          "style-src": ["self", "data:"],
+        },
+        customHeaders: {
+          "X-Frame-Options": "sameorigin",
+          "X-Content-Type-Options": "nosniff",
+          "Referrer-Policy": "strict-origin-when-cross-origin",
+          "Permissions-Policy": "interest-cohort=()",
+        },
+        notCachedFiles: [],
+      },
+    },
   ],
   transformers: {
     remark: {
@@ -45,8 +78,8 @@ module.exports = {
               tabIndex: -1,
             },
           },
-        ]
+        ],
       ],
     },
-  }
+  },
 }

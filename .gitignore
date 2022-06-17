@@ -69,3 +69,6 @@ yarn-error.log
 .pnp.js
 # yarn Integrity file
 .yarn-integrity
+
+# .htaccess files
+.htaccess
