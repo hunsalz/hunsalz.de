@@ -53,7 +53,7 @@ module.exports = {
           "font-src": ["self", "data:"],
           "frame-src": ["self", "data:"],
           "img-src": ["self", "data:"],
-          "script-src": ["self", "data:"],
+          "script-src": ["self", "data:", "unsafe-inline"], // TODO - Gridsome (and Gatsby) inline the initial state, which is a big <script></script> block
           "style-src": ["self", "data:"],
         },
         customHeaders: {
