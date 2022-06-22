@@ -43,7 +43,7 @@ jobs:
           npm ci
           npm run build
 
-      - name: Deploy to IONOS
+      - name: Deploy to IONOS ${{ steps.project.outputs.site-url }}
         if: ${{ steps.project.outputs.deployment-enabled == 'true' }}
         uses: ionos-deploy-now/deploy-to-ionos-action@v1
         with:
