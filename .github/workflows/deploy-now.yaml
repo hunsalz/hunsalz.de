@@ -33,14 +33,14 @@ jobs:
         if: ${{ steps.project.outputs.deployment-enabled == 'true' }}
         uses: actions/setup-node@v1
         with:
-          node-version: v16.x
+          node-version: v18.x
 
       - name: Build Node assets
         env:
           CI: true
           SITE_URL: ${{ steps.project.outputs.site-url }}
         run: |
-          npm ci
+          npm install
           npm run build
 
       - name: Deploy to IONOS ${{ steps.project.outputs.site-url }}
