@@ -50,6 +50,8 @@ typings/
 
 # optional eslint cache
 .eslintcache
+# Astro generated files
+.astro/
 
 # optional REPL history
 .node_repl_history
