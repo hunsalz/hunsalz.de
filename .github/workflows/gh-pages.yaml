@@ -15,21 +15,20 @@ jobs:
     runs-on: ubuntu-latest
     env:
       GH_TOKEN_AVAILABLE: ${{ secrets.GH_TOKEN && true || false }}
-      RUN_CI: ${{ !contains(github.event.head_commit.message, 'skip ci') }}
+      RUN_CI_INITIAL: ${{ !contains(github.event.head_commit.message, 'skip ci') }}
     outputs:
-      run_ci: ${{ steps.result.outputs.run_ci }}
+      run_ci_final: ${{ steps.set_output.outputs.run_ci_final }}
     steps:
       - name: Log
         run: |
           echo "::group::Results"
           echo "GitHub token ${{ env.GH_TOKEN_AVAILABLE == 'true' && 'available' || 'unavailable' }}"
-          echo "Auto deployment ${{ env.RUN_CI == 'true' && 'enabled' || 'skipped' }}"
+          echo "Auto deployment ${{ env.RUN_CI_INITIAL == 'true' && 'enabled' || 'skipped' }}"
           echo "::endgroup::"
-      - name: Result
-        id: result
-        run: | 
-          echo "RUN_CI=${{ env.GH_TOKEN_AVAILABLE == 'true' && env.RUN_CI == 'true' }}" >> $GITHUB_ENV
-          echo ${{ env.TEST }}
+      - name: Set RUN_CI output
+        id: set_output
+        run: |
+          echo "run_ci_final=${{ env.GH_TOKEN_AVAILABLE == 'true' && env.RUN_CI_INITIAL == 'true' }}" >> $GITHUB_OUTPUT
           echo "TEST=LOREM" >> $GITHUB_ENV
       - name: Log2
         run: echo ${{ env.TEST }}
@@ -38,7 +37,7 @@ jobs:
     needs: preflight
     runs-on: ubuntu-latest
     env:
-      RUN_CI: ${{ env.RUN_CI }}
+      RUN_CI: ${{ fromJSON(needs.preflight.outputs.run_ci_final) }}
       SITE_TITLE: My home is my castle
       SITE_URL: https://hunsalz.github.io
       PATH_PREFIX: /hunsalz.de
