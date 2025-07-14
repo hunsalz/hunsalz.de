@@ -1,34 +1,32 @@
 {
-  "name": "hunsalz.de",
-  "version": "0.0.1",
-  "description": "Portfolio page",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/hunsalz/hunsalz.de.git"
-  },
-  "author": {
-    "name": "Markus Hunsalz"
-  },
-  "scripts": {
-    "build": "gridsome build",
-    "develop": "gridsome develop",
-    "explore": "gridsome explore",
-    "markdown:lint": "markdownlint '**/*.md' --ignore node_modules",
-    "markdown:fix": "markdownlint '**/*.md' --ignore node_modules --fix"
-  },
-  "dependencies": {
-    "@fontsource/overpass": "^4.5.8",
-    "gridsome": "^0.7.23",
-    "vue-material-design-icons": "^5.0.0"
-  },
-  "devDependencies": {
-    "@gridsome/plugin-sitemap": "^0.4.0",
-    "@gridsome/source-filesystem": "^0.6.2",
-    "@gridsome/transformer-remark": "^0.6.4",
-    "gridsome-plugin-htaccess": "^0.2.1",
-    "gridsome-plugin-windicss": "^1.0.6",
-    "node-sass": "^6.0.1",
-    "sass-loader": "^10.1.1",
-    "markdownlint-cli": "0.31.1"
-  }
+    "name": "hunsalz.de-astro",
+    "type": "module",
+    "version": "0.0.1",
+    "scripts": {
+        "dev": "astro dev",
+        "build": "astro build",
+        "preview": "astro preview",
+        "astro": "astro",
+        "lint": "eslint . --ext .js,.ts,.astro",
+        "format": "prettier --write \"**/*.{js,ts,json,css,astro}\""
+    },
+    "dependencies": {
+        "@astrojs/sitemap": "^3.4.1",
+        "@iconify-json/mdi": "^1.2.3",
+        "astro": "^5.11.0",
+        "astro-icon": "^1.1.5"
+    },
+    "devDependencies": {
+        "@eslint/js": "^9.30.1",
+        "@typescript-eslint/eslint-plugin": "^8.36.0",
+        "@typescript-eslint/parser": "^8.36.0",
+        "astro-eslint-parser": "^1.2.2",
+        "eslint": "^9.30.1",
+        "eslint-plugin-astro": "^1.3.1",
+        "eslint-plugin-prettier": "^5.5.1",
+        "prettier": "^3.6.2",
+        "prettier-plugin-astro": "^0.14.1",
+        "typescript-eslint": "^8.36.0",
+        "unocss": "^66.3.3"
+    }
 }
