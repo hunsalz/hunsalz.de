@@ -11,10 +11,13 @@
         "format": "prettier --write \"**/*.{js,ts,json,css,astro}\""
     },
     "dependencies": {
+        "@astrojs/check": "^0.9.4",
         "@astrojs/sitemap": "^3.4.1",
         "@iconify-json/mdi": "^1.2.3",
+        "@unocss/preset-uno": "^66.3.3",
         "astro": "^5.11.0",
-        "astro-icon": "^1.1.5"
+        "astro-icon": "^1.1.5",
+        "typescript": "^5.8.3"
     },
     "devDependencies": {
         "@eslint/js": "^9.30.1",
