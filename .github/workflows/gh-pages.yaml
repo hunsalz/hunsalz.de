@@ -6,6 +6,10 @@ on:
       - "**" # includes
       - "!README.md" # excludes
 
+permissions:
+  contents: write
+  pages: write
+
 env:
   TEST: "TEST"
 
@@ -36,9 +40,6 @@ jobs:
     name: Build & Deploy
     needs: preflight
     runs-on: ubuntu-latest
-    permissions:
-      contents: write
-      pages: write
     env:
       RUN_CI: ${{ fromJSON(needs.preflight.outputs.run_ci_final) }}
       SITE_TITLE: My home is my castle
