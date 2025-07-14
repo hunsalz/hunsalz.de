@@ -4,7 +4,7 @@
 [![Open with CodeSandbox](https://assets.codesandbox.io/github/button-edit-lime.svg)](https://codesandbox.io/p/sandbox/github/withastro/astro/tree/latest/examples/minimal)
 [![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/withastro/astro?devcontainer_path=.devcontainer/minimal/devcontainer.json)
 
-[![Deploy Now](https://github.com/hunsalz/hunsalz.de/actions/workflows/deploy-now.yaml/badge.svg)](https://github.com/hunsalz/hunsalz.de/actions/workflows/deploy-now.yaml)
+[![Deploy Now](https://github.com/hunsalz/hunsalz.de/actions/workflows/deploy-to-ionos.yaml/badge.svg)](https://github.com/hunsalz/hunsalz.de/actions/workflows/deploy-to-ionos.yaml)
 
 [![Deploy to GitHub Pages](https://github.com/hunsalz/hunsalz.de/actions/workflows/gh-pages.yaml/badge.svg)](https://github.com/hunsalz/hunsalz.de/actions/workflows/gh-pages.yaml)
 
