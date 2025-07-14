@@ -1,4 +1,5 @@
-import { defineConfig, presetUno, presetIcons, presetWebFonts } from "unocss";
+import { defineConfig, presetIcons, presetWebFonts } from "unocss";
+import presetUno from "@unocss/preset-uno";
 
 export default defineConfig({
     theme: {
