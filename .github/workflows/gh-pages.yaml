@@ -28,7 +28,7 @@ jobs:
       - name: Result
         id: result
         run: | 
-          echo "::set-output name=run_ci::${{ env.GH_TOKEN_AVAILABLE == 'true' && env.RUN_CI == 'true' }}"
+          echo "RUN_CI=${{ env.GH_TOKEN_AVAILABLE == 'true' && env.RUN_CI == 'true' }}" >> $GITHUB_ENV
           echo ${{ env.TEST }}
           echo "TEST=LOREM" >> $GITHUB_ENV
       - name: Log2
@@ -38,7 +38,7 @@ jobs:
     needs: preflight
     runs-on: ubuntu-latest
     env:
-      RUN_CI: ${{ fromJSON(needs.preflight.outputs.run_ci) }}
+      RUN_CI: ${{ env.RUN_CI }}
       SITE_TITLE: My home is my castle
       SITE_URL: https://hunsalz.github.io
       PATH_PREFIX: /hunsalz.de

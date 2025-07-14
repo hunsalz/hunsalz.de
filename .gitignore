@@ -74,3 +74,6 @@ yarn-error.log
 
 # .htaccess files
 .htaccess
+
+# package-lock.json
+package-lock.json
