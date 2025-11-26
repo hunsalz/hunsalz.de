@@ -5,6 +5,7 @@
 [![Deploy Now Status](https://github.com/hunsalz/hunsalz.de/actions/workflows/deploy-to-ionos.yaml/badge.svg)](https://github.com/hunsalz/hunsalz.de/actions/workflows/deploy-to-ionos.yaml)
 [![GitHub Pages Status](https://github.com/hunsalz/hunsalz.de/actions/workflows/gh-pages.yaml/badge.svg)](https://github.com/hunsalz/hunsalz.de/actions/workflows/gh-pages.yaml)
 [![Netlify Status](https://api.netlify.com/api/v1/badges/337fbe9c-ddb6-4757-97e9-a974035e8955/deploy-status)](https://app.netlify.com/projects/hunsalz-de/deploys)
+[![Vercel Status](https://vercel.com/markus-hunsalzs-projects/hunsalz-de/badge.svg)](https://vercel.com/markus-hunsalzs-projects/hunsalz-de)
 
 ## Online coding
 
