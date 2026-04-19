@@ -17,7 +17,7 @@
         "@unocss/preset-uno": "^66.5.9",
         "astro": "^5.16.0",
         "astro-icon": "^1.1.5",
-        "typescript": "^5.9.3"
+        "typescript": "^6.0.3"
     },
     "devDependencies": {
         "@eslint/js": "^9.39.1",
