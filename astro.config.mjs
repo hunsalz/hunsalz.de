@@ -9,7 +9,8 @@ export default defineConfig({
   site: 'https://hunsalz.de',
   integrations: [
     unocss({
-      injectReset: true,
+      injectEntry: false,
+      injectReset: false,
     }),
     icon(),
     sitemap(),
