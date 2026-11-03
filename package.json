@@ -11,25 +11,32 @@
         "format": "prettier --write \"**/*.{js,ts,json,css,astro}\""
     },
     "dependencies": {
-        "@astrojs/check": "^0.9.5",
-        "@astrojs/sitemap": "^3.6.0",
+        "@astrojs/check": "^0.9.12",
+        "@astrojs/sitemap": "^3.7.4",
         "@iconify-json/mdi": "^1.2.3",
-        "@unocss/preset-uno": "^66.5.9",
-        "astro": "^5.16.0",
-        "astro-icon": "^1.1.5",
+        "@unocss/preset-uno": "^66.12.0",
+        "astro": "^7.4.5",
+        "astro-icon": "^1.2.0",
         "typescript": "^6.0.3"
     },
     "devDependencies": {
-        "@eslint/js": "^9.39.1",
-        "@typescript-eslint/eslint-plugin": "^8.48.0",
-        "@typescript-eslint/parser": "^8.48.0",
-        "astro-eslint-parser": "^1.2.2",
-        "eslint": "^9.39.1",
-        "eslint-plugin-astro": "^1.5.0",
-        "eslint-plugin-prettier": "^5.5.4",
-        "prettier": "^3.6.2",
-        "prettier-plugin-astro": "^0.14.1",
-        "typescript-eslint": "^8.48.0",
-        "unocss": "^66.5.9"
+        "@eslint/js": "^10.0.1",
+        "@typescript-eslint/eslint-plugin": "^8.72.1",
+        "@typescript-eslint/parser": "^8.72.1",
+        "@unocss/astro": "^66.12.0",
+        "astro-eslint-parser": "^3.2.0",
+        "eslint": "^10.14.0",
+        "eslint-plugin-astro": "^3.2.1",
+        "eslint-plugin-prettier": "^5.5.7",
+        "prettier": "^3.9.10",
+        "prettier-plugin-astro": "^1.1.2",
+        "typescript-eslint": "^8.72.1",
+        "unocss": "^66.12.0"
+    },
+    "engines": {
+        "node": ">=22.23.4"
+    },
+    "overrides": {
+        "minimatch@^10": "11.0.1"
     }
 }
