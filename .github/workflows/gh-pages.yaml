@@ -52,7 +52,7 @@ jobs:
           echo ${{ env.TEST }}
       - name: Checkout project
         if: ${{ env.RUN_CI == 'true' }}
-        uses: actions/checkout@v3
+        uses: actions/checkout@v6
         with:
           submodules: "recursive"
       - name: Check GITHUB_TOKEN permissions
