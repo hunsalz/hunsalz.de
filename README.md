@@ -20,3 +20,9 @@ Use Node.js 22.23.4 or newer (deployment workflows use Node.js 24).
 The `minimatch@^10` override pins lint tooling to 11.0.1 to fix
 [GHSA-g3hv-75wg-m249](https://github.com/advisories/GHSA-g3hv-75wg-m249).
 Remove the override once ESLint and TypeScript ESLint accept a patched version.
+
+## Vercel previews of GitHub Pages
+
+The `gh-pages` branch contains the generated static site, without source dependencies.
+Astro copies `public/vercel.json` to the build output so Vercel serves this branch
+directly, skipping dependency installation and a second Astro build.
