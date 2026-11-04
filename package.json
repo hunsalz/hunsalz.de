@@ -8,7 +8,8 @@
         "preview": "astro preview",
         "astro": "astro",
         "lint": "eslint . --ext .js,.ts,.astro",
-        "format": "prettier --write \"**/*.{js,ts,json,css,astro}\""
+        "format": "prettier --write \"**/*.{js,ts,json,css,astro}\"",
+        "check": "npm run lint && astro check && astro build"
     },
     "dependencies": {
         "@astrojs/check": "^0.9.12",

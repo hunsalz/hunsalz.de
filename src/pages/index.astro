@@ -10,26 +10,86 @@ import Social from "../components/Social.astro";
     <section class="poster" aria-label="Introduction">
         <div class="geometry" aria-hidden="true">
             <svg viewBox="0 0 800 650" fill="none" focusable="false">
-                <g stroke="currentColor" stroke-width="1" vector-effect="non-scaling-stroke">
-                    <rect x="-180" y="300" width="570" height="390" transform="rotate(-19 105 495)" />
-                    <rect x="-110" y="370" width="650" height="300" transform="rotate(-32 215 520)" />
-                    <rect class="accent" x="-160" y="420" width="630" height="260" transform="rotate(-12 155 550)" />
-                    <rect x="-240" y="230" width="520" height="520" transform="rotate(14 20 490)" />
+                <g
+                    stroke="currentColor"
+                    stroke-width="1"
+                    vector-effect="non-scaling-stroke"
+                >
+                    <rect
+                        x="-180"
+                        y="300"
+                        width="570"
+                        height="390"
+                        transform="rotate(-19 105 495)"
+                    />
+                    <rect
+                        x="-110"
+                        y="370"
+                        width="650"
+                        height="300"
+                        transform="rotate(-32 215 520)"
+                    />
+                    <rect
+                        class="accent"
+                        x="-160"
+                        y="420"
+                        width="630"
+                        height="260"
+                        transform="rotate(-12 155 550)"
+                    />
+                    <rect
+                        x="-240"
+                        y="230"
+                        width="520"
+                        height="520"
+                        transform="rotate(14 20 490)"
+                    />
                 </g>
             </svg>
         </div>
         <div class="geometry geometry-upper" aria-hidden="true">
             <svg viewBox="0 0 800 650" fill="none" focusable="false">
-                <g stroke="currentColor" stroke-width="1" vector-effect="non-scaling-stroke">
-                    <rect x="-180" y="300" width="570" height="390" transform="rotate(-19 105 495)" />
-                    <rect x="-110" y="370" width="650" height="300" transform="rotate(-32 215 520)" />
-                    <rect class="accent" x="-160" y="420" width="630" height="260" transform="rotate(-12 155 550)" />
-                    <rect x="-240" y="230" width="520" height="520" transform="rotate(14 20 490)" />
+                <g
+                    stroke="currentColor"
+                    stroke-width="1"
+                    vector-effect="non-scaling-stroke"
+                >
+                    <rect
+                        x="-180"
+                        y="300"
+                        width="570"
+                        height="390"
+                        transform="rotate(-19 105 495)"
+                    />
+                    <rect
+                        x="-110"
+                        y="370"
+                        width="650"
+                        height="300"
+                        transform="rotate(-32 215 520)"
+                    />
+                    <rect
+                        class="accent"
+                        x="-160"
+                        y="420"
+                        width="630"
+                        height="260"
+                        transform="rotate(-12 155 550)"
+                    />
+                    <rect
+                        x="-240"
+                        y="230"
+                        width="520"
+                        height="520"
+                        transform="rotate(14 20 490)"
+                    />
                 </g>
             </svg>
         </div>
         <div class="identity">
-            <h1><span>Markus</span> <span>Hunsalz</span></h1>
+            <h1>
+                <span>Markus</span> <span>Hunsalz</span>
+            </h1>
             <Social />
         </div>
     </section>
@@ -55,8 +115,16 @@ import Social from "../components/Social.astro";
         height: min(75svh, 730px);
         color: rgb(37 38 34 / 18%);
         pointer-events: none;
-        -webkit-mask-image: radial-gradient(ellipse at 0% 100%, #000 8%, transparent 72%);
-        mask-image: radial-gradient(ellipse at 0% 100%, #000 8%, transparent 72%);
+        -webkit-mask-image: radial-gradient(
+            ellipse at 0% 100%,
+            #000 8%,
+            transparent 72%
+        );
+        mask-image: radial-gradient(
+            ellipse at 0% 100%,
+            #000 8%,
+            transparent 72%
+        );
     }
 
     .geometry-upper {

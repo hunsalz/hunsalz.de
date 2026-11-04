@@ -3,8 +3,22 @@ import { Icon } from "astro-icon/components";
 ---
 
 <nav class="social" aria-label="Social links">
-    <a href="https://github.com/hunsalz" target="_blank" rel="noopener noreferrer"><Icon name="mdi:github" aria-hidden="true" />GitHub</a>
-    <a href="https://www.linkedin.com/in/markus-hunsalz" target="_blank" rel="noopener noreferrer"><Icon name="mdi:linkedin" aria-hidden="true" />LinkedIn</a>
+    <a
+        href="https://github.com/hunsalz"
+        target="_blank"
+        rel="noopener noreferrer"
+    >
+        <Icon name="mdi:github" aria-hidden="true" />
+        GitHub
+    </a>
+    <a
+        href="https://www.linkedin.com/in/markus-hunsalz"
+        target="_blank"
+        rel="noopener noreferrer"
+    >
+        <Icon name="mdi:linkedin" aria-hidden="true" />
+        LinkedIn
+    </a>
 </nav>
 
 <style>
@@ -45,6 +59,8 @@ import { Icon } from "astro-icon/components";
     }
 
     @media (prefers-reduced-motion: reduce) {
-        a { transition: none; }
+        a {
+            transition: none;
+        }
     }
 </style>

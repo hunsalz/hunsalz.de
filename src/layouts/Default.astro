@@ -15,7 +15,7 @@ import "uno.css";
     </head>
     <body>
         <main>
-                <slot />
+            <slot />
         </main>
     </body>
 </html>
@@ -30,7 +30,14 @@ import "uno.css";
         -webkit-font-smoothing: antialiased;
     }
 
-    body { margin: 0; }
-    * { box-sizing: border-box; }
-    ::selection { background: #a34f35; color: var(--paper); }
+    body {
+        margin: 0;
+    }
+    * {
+        box-sizing: border-box;
+    }
+    ::selection {
+        background: #a34f35;
+        color: var(--paper);
+    }
 </style>

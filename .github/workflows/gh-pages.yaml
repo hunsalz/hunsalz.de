@@ -2,81 +2,33 @@ name: Deploy to GitHub Pages
 
 on:
   push:
-    paths:
-      - "**" # includes
-      - "!README.md" # excludes
+    branches: [main]
+    paths-ignore: [README.md]
+  workflow_dispatch:
 
 permissions:
-  contents: write
-  pages: write
+  contents: read
 
-env:
-  TEST: "TEST"
+concurrency:
+  group: github-pages-${{ github.ref }}
+  cancel-in-progress: false
 
 jobs:
-  preflight:
-    name: Preflight
+  validate:
+    uses: ./.github/workflows/ci.yaml
+  deploy:
+    name: Deploy validated site
+    needs: validate
     runs-on: ubuntu-latest
-    env:
-      GH_TOKEN_AVAILABLE: ${{ secrets.GH_TOKEN && true || false }}
-      RUN_CI_INITIAL: ${{ !contains(github.event.head_commit.message, 'skip ci') }}
-    outputs:
-      run_ci_final: ${{ steps.set_output.outputs.run_ci_final }}
+    permissions:
+      contents: write
     steps:
-      - name: Log
-        run: |
-          echo "::group::Results"
-          echo "GitHub token ${{ env.GH_TOKEN_AVAILABLE == 'true' && 'available' || 'unavailable' }}"
-          echo "Auto deployment ${{ env.RUN_CI_INITIAL == 'true' && 'enabled' || 'skipped' }}"
-          echo "::endgroup::"
-      - name: Set RUN_CI output
-        id: set_output
-        run: |
-          echo "run_ci_final=${{ env.GH_TOKEN_AVAILABLE == 'true' && env.RUN_CI_INITIAL == 'true' }}" >> $GITHUB_OUTPUT
-          echo "TEST=LOREM" >> $GITHUB_ENV
-      - name: Log2
-        run: echo ${{ env.TEST }}
-  build_and_deploy:
-    name: Build & Deploy
-    needs: preflight
-    runs-on: ubuntu-latest
-    env:
-      RUN_CI: ${{ fromJSON(needs.preflight.outputs.run_ci_final) }}
-      SITE_TITLE: My home is my castle
-      SITE_URL: https://hunsalz.github.io
-      PATH_PREFIX: /hunsalz.de
-    steps:
-      - name: Log
-        run: | 
-          echo ${{ env.RUN_CI }}
-          echo ${{ env.TEST }}
-      - name: Checkout project
-        if: ${{ env.RUN_CI == 'true' }}
-        uses: actions/checkout@v6
+      - name: Download validated site
+        uses: actions/download-artifact@v4
         with:
-          submodules: "recursive"
-      - name: Check GITHUB_TOKEN permissions
-        if: ${{ env.RUN_CI == 'true' }}
-        run: | 
-          gh auth status
-          gh auth setup-git
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      - name: Prepare env
-        if: ${{ env.RUN_CI == 'true' }}
-        uses: actions/setup-node@v6
-        with:
-          node-version: 24.x
-      - name: Install dependencies
-        if: ${{ env.RUN_CI == 'true' }}
-        run: npm install
-      - name: Build project
-        if: ${{ env.RUN_CI == 'true' }}
-        run: npm run build
-        env:
-          CI: true
+          name: validated-site
+          path: dist
       - name: Deploy to GitHub Pages
-        if: ${{ env.RUN_CI == 'true' }}
         uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}

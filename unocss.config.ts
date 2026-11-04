@@ -12,7 +12,6 @@ export default defineConfig({
                 "system-ui",
                 "sans-serif",
             ],
-            mono: ["Overpass Mono", "monospace"],
         },
         extend: {
             screens: {
@@ -36,9 +35,8 @@ export default defineConfig({
         presetIcons(),
         presetWebFonts({
             fonts: {
-                sans: "Open Sans",
-                headline: "Overpass",
-                mono: "Overpass Mono",
+                sans: { name: "Open Sans", weights: [400] },
+                headline: { name: "Overpass", weights: [800] },
             },
         }),
     ],
