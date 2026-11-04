@@ -46,3 +46,25 @@ directly, skipping dependency installation and a second Astro build.
 - [StackBlitz](https://stackblitz.com/github/hunsalz/hunsalz.de)
 - [CodeSandbox](https://codesandbox.io/p/github/hunsalz/hunsalz.de/main)
 - [GitHub Codespaces](https://codespaces.new/hunsalz/hunsalz.de)
+
+## Dependency maintenance and fonts
+
+Dependabot groups minor and patch updates for UnoCSS, ESLint, formatting, fonts,
+and GitHub Actions. Major upgrades remain individual pull requests.
+
+Open Sans 400 and Overpass 800 are bundled from the OFL-1.1-licensed
+`@fontsource` packages. Only the Latin subsets are imported. Astro emits local,
+versioned font assets, so font loading needs no third-party requests at build time
+or in visitors' browsers. Font packages and their licenses are pinned by the lockfile.
+
+## Protecting main
+
+The importable ruleset is stored in [`.github/rulesets/main.json`](.github/rulesets/main.json).
+An administrator must import it in [Settings → Rules → Rulesets](https://github.com/hunsalz/hunsalz.de/settings/rules).
+The file alone does not activate protection.
+
+The rule requires a pull request, the GitHub Actions check
+`validate / Lint, types, and build`, an up-to-date branch, and resolved review threads.
+It blocks deletion and force pushes. No reviewer approval is required, so the owner
+can merge their own pull requests once checks pass. No bypass actors are configured.
+Pull requests and production validation use the same reusable workflow and check name.
