@@ -6,6 +6,10 @@ updates:
           interval: "weekly"
       open-pull-requests-limit: 5
       rebase-strategy: "auto"
+      # Re-enable major TypeScript updates once Astro Check and TypeScript ESLint support them.
+      ignore:
+          - dependency-name: "typescript"
+            update-types: ["version-update:semver-major"]
       groups:
           eslint:
               patterns:
