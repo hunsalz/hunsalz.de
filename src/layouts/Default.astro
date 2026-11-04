@@ -1,8 +1,13 @@
 ---
-import "@unocss/reset/tailwind.css";
-import "uno.css";
 import "@fontsource/open-sans/latin-400.css";
 import "@fontsource/overpass/latin-800.css";
+
+interface Props {
+    title: string;
+    description: string;
+}
+
+const { title, description } = Astro.props;
 ---
 
 <!doctype html>
@@ -12,8 +17,8 @@ import "@fontsource/overpass/latin-800.css";
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
         <meta name="generator" content={Astro.generator} />
-        <title>{Astro.props.title}</title>
-        <meta name="description" content={Astro.props.description} />
+        <title>{title}</title>
+        <meta name="description" content={description} />
     </head>
     <body>
         <main>
@@ -23,6 +28,13 @@ import "@fontsource/overpass/latin-800.css";
 </html>
 
 <style is:global>
+    html {
+        line-height: 1.5;
+        -webkit-text-size-adjust: 100%;
+        font-family: ui-sans-serif, system-ui, sans-serif;
+        -webkit-tap-highlight-color: transparent;
+    }
+
     :root {
         --paper: #f3f0e8;
         --ink: #252622;
@@ -35,8 +47,15 @@ import "@fontsource/overpass/latin-800.css";
     body {
         margin: 0;
     }
-    * {
+    *,
+    ::before,
+    ::after {
         box-sizing: border-box;
+    }
+
+    svg {
+        display: block;
+        vertical-align: middle;
     }
     ::selection {
         background: #a34f35;
