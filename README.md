@@ -6,7 +6,9 @@ and Vercel. Visit [hunsalz.de](https://hunsalz.de).
 
 ## Development
 
-Use Node.js 24 (minimum supported version: 22.23.4).
+Use Node.js 24. `.nvmrc` selects the same major version for local development,
+GitHub Actions, IONOS, and Netlify; `package.json` selects it for Vercel.
+With nvm installed, run `nvm use` before installing dependencies.
 
 ```sh
 npm ci
@@ -14,9 +16,9 @@ npm run dev
 ```
 
 ```sh
-npm run check    # lint, Astro type checks, and production build
+npm run check    # formatting, lint, Astro type checks, and production build
 npm run preview  # serve the production build locally
-npm run format   # format source files
+npm run format   # format source, configuration, and documentation
 ```
 
 Commit `package-lock.json` with dependency changes. Use `npm ci` to reproduce the
@@ -29,14 +31,14 @@ reviewed dependency versions.
 Each provider independently builds the source on `main`. Build output is not shared
 between providers; the committed lockfile provides a common dependency baseline.
 
-| Provider | Build configuration | Deployment target | Status |
-| --- | --- | --- | --- |
-| GitHub Pages | `npm ci` → `npm run check` in GitHub Actions | Validated `dist` artifact → `gh-pages` | [![GitHub Pages](https://github.com/hunsalz/hunsalz.de/actions/workflows/gh-pages.yaml/badge.svg)](https://github.com/hunsalz/hunsalz.de/actions/workflows/gh-pages.yaml) |
-| IONOS | `npm ci` → `npm run check` in its separate build workflow | Own `dist` artifact → IONOS Deploy Now | [![IONOS](https://github.com/hunsalz/hunsalz.de/actions/workflows/hunsalz.de-orchestration.yaml/badge.svg)](https://github.com/hunsalz/hunsalz.de/actions/workflows/hunsalz.de-orchestration.yaml) |
-| Netlify | Build settings managed in Netlify | Netlify | [![Netlify](https://api.netlify.com/api/v1/badges/337fbe9c-ddb6-4757-97e9-a974035e8955/deploy-status?branch=main)](https://app.netlify.com/projects/hunsalz-de/deploys) |
-| Vercel | `npm ci` → `npm run build`, configured in [`vercel.json`](vercel.json) | Own `dist` output → Vercel | [![Vercel](https://img.shields.io/github/deployments/hunsalz/hunsalz.de/Production.svg?label=Vercel&logo=vercel)](https://vercel.com/markus-hunsalzs-projects/hunsalz-de) |
+| Provider     | Build configuration                                                    | Deployment target                      | Status                                                                                                                                                                                             |
+| ------------ | ---------------------------------------------------------------------- | -------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| GitHub Pages | `npm ci` → `npm run check` in GitHub Actions                           | Validated `dist` artifact → `gh-pages` | [![GitHub Pages](https://github.com/hunsalz/hunsalz.de/actions/workflows/gh-pages.yaml/badge.svg)](https://github.com/hunsalz/hunsalz.de/actions/workflows/gh-pages.yaml)                          |
+| IONOS        | `npm ci` → `npm run check` in its separate build workflow              | Own `dist` artifact → IONOS Deploy Now | [![IONOS](https://github.com/hunsalz/hunsalz.de/actions/workflows/hunsalz.de-orchestration.yaml/badge.svg)](https://github.com/hunsalz/hunsalz.de/actions/workflows/hunsalz.de-orchestration.yaml) |
+| Netlify      | Build settings managed in Netlify                                      | Netlify                                | [![Netlify](https://api.netlify.com/api/v1/badges/337fbe9c-ddb6-4757-97e9-a974035e8955/deploy-status?branch=main)](https://app.netlify.com/projects/hunsalz-de/deploys)                            |
+| Vercel       | `npm ci` → `npm run build`, configured in [`vercel.json`](vercel.json) | Own `dist` output → Vercel             | [![Vercel](https://img.shields.io/github/deployments/hunsalz/hunsalz.de/Production.svg?label=Vercel&logo=vercel)](https://vercel.com/markus-hunsalzs-projects/hunsalz-de)                          |
 
-Pull requests run lint, Astro type checks, and a production build. GitHub Pages and
+Pull requests run formatting checks, lint, Astro type checks, and a production build. GitHub Pages and
 IONOS also require these checks before publishing. Vercel's badge reflects the latest
 `Production` deployment reported by its GitHub integration; badge updates may be cached.
 

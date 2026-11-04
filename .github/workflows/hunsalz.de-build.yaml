@@ -4,52 +4,52 @@
 name: "Deploy Now: Execute Build"
 
 on:
-  workflow_call:
-    inputs:
-      site-url:
-        required: true
-        type: string
-      branch-id:
-        required: true
-        type: string
+    workflow_call:
+        inputs:
+            site-url:
+                required: true
+                type: string
+            branch-id:
+                required: true
+                type: string
 
 env:
-  DEPLOYMENT_FOLDER: dist
+    DEPLOYMENT_FOLDER: dist
 
 jobs:
-# Please do not rename this job
-  build-project:
-    name: build hunsalz.de
-    runs-on: ubuntu-latest
-    steps:
-      - name: checkout
-        uses: actions/checkout@v6
-        with:
-          submodules: 'recursive'
+    # Please do not rename this job
+    build-project:
+        name: build hunsalz.de
+        runs-on: ubuntu-latest
+        steps:
+            - name: checkout
+              uses: actions/checkout@v6
+              with:
+                  submodules: "recursive"
 
-      - name: Setup Node
-        uses: actions/setup-node@v6
-        with:
-          node-version: 24.x
-          cache: npm
+            - name: Setup Node
+              uses: actions/setup-node@v6
+              with:
+                  node-version-file: .nvmrc
+                  cache: npm
 
-      - name: Build Node assets
-        env:
-          CI: true
-          SITE_URL: ${{ inputs.site-url }}
-        run: |
-          npm ci
-          npm run check
+            - name: Build Node assets
+              env:
+                  CI: true
+                  SITE_URL: ${{ inputs.site-url }}
+              run: |
+                  npm ci
+                  npm run check
 
-# Please do not touch the following action
-      - name: Store deployment content
-        uses: ionos-deploy-now/artifact-action@v1
-        with:
-          api-key: ${{ secrets.IONOS_API_KEY }}
-          service-host: api-eu.ionos.space
-          project-id: c5de6ae9-f3f1-4810-9b04-9062a77ef4f9
-          branch-id: ${{ inputs.branch-id }}
-          version: ${{ github.sha }}
-          folder: ${{ env.DEPLOYMENT_FOLDER }}
-          config-file: .deploy-now/hunsalz.de/config.yaml
-          action: upload
+            # Please do not touch the following action
+            - name: Store deployment content
+              uses: ionos-deploy-now/artifact-action@v1
+              with:
+                  api-key: ${{ secrets.IONOS_API_KEY }}
+                  service-host: api-eu.ionos.space
+                  project-id: c5de6ae9-f3f1-4810-9b04-9062a77ef4f9
+                  branch-id: ${{ inputs.branch-id }}
+                  version: ${{ github.sha }}
+                  folder: ${{ env.DEPLOYMENT_FOLDER }}
+                  config-file: .deploy-now/hunsalz.de/config.yaml
+                  action: upload

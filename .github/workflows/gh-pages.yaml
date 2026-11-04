@@ -1,36 +1,36 @@
 name: Deploy to GitHub Pages
 
 on:
-  push:
-    branches: [main]
-    paths-ignore: [README.md]
-  workflow_dispatch:
+    push:
+        branches: [main]
+        paths-ignore: [README.md]
+    workflow_dispatch:
 
 permissions:
-  contents: read
+    contents: read
 
 concurrency:
-  group: github-pages-${{ github.ref }}
-  cancel-in-progress: false
+    group: github-pages-${{ github.ref }}
+    cancel-in-progress: false
 
 jobs:
-  validate:
-    uses: ./.github/workflows/ci.yaml
-  deploy:
-    name: Deploy validated site
-    needs: validate
-    runs-on: ubuntu-latest
-    permissions:
-      contents: write
-    steps:
-      - name: Download validated site
-        uses: actions/download-artifact@v4
-        with:
-          name: validated-site
-          path: dist
-      - name: Deploy to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v4
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./dist
-          cname: hunsalz.de
+    validate:
+        uses: ./.github/workflows/ci.yaml
+    deploy:
+        name: Deploy validated site
+        needs: validate
+        runs-on: ubuntu-latest
+        permissions:
+            contents: write
+        steps:
+            - name: Download validated site
+              uses: actions/download-artifact@v4
+              with:
+                  name: validated-site
+                  path: dist
+            - name: Deploy to GitHub Pages
+              uses: peaceiris/actions-gh-pages@v4
+              with:
+                  github_token: ${{ secrets.GITHUB_TOKEN }}
+                  publish_dir: ./dist
+                  cname: hunsalz.de

@@ -1,12 +1,12 @@
 name: Validate pull request
 
 on:
-  pull_request:
-    branches: [main]
+    pull_request:
+        branches: [main]
 
 permissions:
-  contents: read
+    contents: read
 
 jobs:
-  validate:
-    uses: ./.github/workflows/ci.yaml
+    validate:
+        uses: ./.github/workflows/ci.yaml
