@@ -68,3 +68,7 @@ Actions. Major upgrades remain individual PRs.
 Maintenance note: the `minimatch@^10` override pins lint tooling to 11.0.1 for
 [GHSA-g3hv-75wg-m249](https://github.com/advisories/GHSA-g3hv-75wg-m249).
 Remove it once upstream dependencies accept a patched version.
+
+TypeScript major upgrades are temporarily ignored by Dependabot because Astro Check
+and TypeScript ESLint currently support TypeScript 6, not 7. Compatible 6.x updates
+remain enabled. Remove the ignore rule once both tools support the next major.
