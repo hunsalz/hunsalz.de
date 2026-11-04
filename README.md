@@ -1,6 +1,6 @@
 # Markus Hunsalz — personal website
 
-A minimal personal website built with Astro, TypeScript, and UnoCSS, and a comparison
+A minimal personal website built with Astro, TypeScript, and plain CSS, and a comparison
 of independent build and deployment pipelines across GitHub Pages, IONOS, Netlify,
 and Vercel. Visit [hunsalz.de](https://hunsalz.de).
 
@@ -57,6 +57,8 @@ are configured. The ruleset is also recorded in [`.github/rulesets/main.json`](.
 
 Open Sans Latin 400 and Overpass Latin 800 are bundled locally from OFL-1.1-licensed
 `@fontsource` packages. Astro emits versioned font assets with no external font requests.
+The two social icons are inline SVGs from Material Design Icons; their Apache-2.0
+license is included in [`LICENSES`](LICENSES/material-design-icons.txt).
 
 Dependabot groups compatible minor and patch updates for tooling, fonts, and GitHub
 Actions. Major upgrades remain individual PRs.
