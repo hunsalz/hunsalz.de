@@ -27,6 +27,10 @@ Remove the override once ESLint and TypeScript ESLint accept a patched version.
 
 ## Validation and deployments
 
+This repository compares independent build and deployment pipelines across providers.
+Each provider builds from the source on `main`, using the committed lockfile; build
+output is not shared between providers.
+
 [![Validation](https://github.com/hunsalz/hunsalz.de/actions/workflows/ci.yaml/badge.svg)](https://github.com/hunsalz/hunsalz.de/actions/workflows/ci.yaml)
 [![GitHub Pages](https://github.com/hunsalz/hunsalz.de/actions/workflows/gh-pages.yaml/badge.svg)](https://github.com/hunsalz/hunsalz.de/actions/workflows/gh-pages.yaml)
 [![IONOS](https://github.com/hunsalz/hunsalz.de/actions/workflows/hunsalz.de-orchestration.yaml/badge.svg)](https://github.com/hunsalz/hunsalz.de/actions/workflows/hunsalz.de-orchestration.yaml)
@@ -35,11 +39,16 @@ Remove the override once ESLint and TypeScript ESLint accept a patched version.
 - Pull requests to `main` run lint, Astro type checks, and a production build.
 - GitHub Pages publishes the exact artifact produced by validation on `main`.
 - IONOS runs the same checks before uploading its deployment artifact.
-- [Vercel deployment status](https://vercel.com/markus-hunsalzs-projects/hunsalz-de) is available in the dashboard; no static success badge is used.
+- Vercel independently installs dependencies with `npm ci`, runs `npm run build`,
+  and publishes `dist` from its own source checkout. The root `vercel.json` records
+  these settings. [Deployment status](https://vercel.com/markus-hunsalzs-projects/hunsalz-de)
+  is available in the dashboard.
+- Netlify also builds from its own source checkout using its provider configuration.
 
-The `gh-pages` branch contains the generated static site, without source dependencies.
-Astro copies `public/vercel.json` to the build output so Vercel serves this branch
-directly, skipping dependency installation and a second Astro build.
+The `gh-pages` branch is generated output for GitHub Pages only. Vercel deployments
+are disabled on this branch: `public/vercel.json` is copied into the generated site
+with `git.deploymentEnabled: false`. Source branches continue to receive independent
+Vercel builds and previews using the root configuration.
 
 ## Online editors
 
