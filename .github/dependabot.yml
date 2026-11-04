@@ -6,6 +6,19 @@ updates:
       interval: "weekly"
     open-pull-requests-limit: 5
     rebase-strategy: "auto"
+    groups:
+      unocss:
+        patterns: ["unocss", "@unocss/*"]
+        update-types: ["minor", "patch"]
+      eslint:
+        patterns: ["eslint", "@eslint/*", "@typescript-eslint/*", "typescript-eslint", "eslint-plugin-*", "astro-eslint-parser"]
+        update-types: ["minor", "patch"]
+      formatting:
+        patterns: ["prettier", "prettier-plugin-*"]
+        update-types: ["minor", "patch"]
+      fonts:
+        patterns: ["@fontsource/*"]
+        update-types: ["minor", "patch"]
 
   - package-ecosystem: "github-actions"
     directory: "/"
@@ -13,3 +26,7 @@ updates:
       interval: "weekly"
     open-pull-requests-limit: 5
     rebase-strategy: "auto"
+    groups:
+      actions:
+        patterns: ["*"]
+        update-types: ["minor", "patch"]
